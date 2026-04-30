@@ -967,6 +967,73 @@
             min-height: 120px;
         }
 
+        /* === FAQ === */
+        .faq-section {
+            background: var(--surface);
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 16px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: box-shadow 0.3s;
+        }
+
+        .faq-item:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 24px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-align: left;
+            gap: 16px;
+            font-family: inherit;
+        }
+
+        .faq-question i {
+            color: var(--secondary);
+            font-size: 1.25rem;
+            flex-shrink: 0;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.open .faq-question i {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 300px;
+        }
+
+        .faq-answer p {
+            padding: 0 32px 24px;
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
         /* === FOOTER === */
         .footer {
             background: var(--primary);
@@ -1101,6 +1168,7 @@
                     <li><a href="#about">About</a></li>
                     <li><a href="#danfo">Danfo Hustle</a></li>
                     <li><a href="#partners">Partners</a></li>
+                    <li><a href="#faq">FAQ</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -1119,7 +1187,7 @@
                     Transforming ideas into
                     <span>impactful digital realities</span>
                 </h1>
-                <p>We craft powerful mobile games, e-commerce platforms, and digital products that connect and inspire — rooted in African culture and built for global impact.</p>
+                <p>We combine creativity and technical skill to deliver outstanding digital products and services.</p>
                 <div class="hero-buttons">
                     <a href="#services" class="btn btn-primary">
                         <i class="bi bi-arrow-right"></i>
@@ -1166,7 +1234,7 @@
                 <h2 class="section-title">
                     Crafting <span>Digital Excellence</span>
                 </h2>
-                <p class="section-desc">Comprehensive digital solutions tailored to elevate your brand and accelerate growth.</p>
+                <p class="section-desc">We deliver technology-driven digital solutions for businesses and communities.</p>
             </div>
             
             <div class="services-grid">
@@ -1237,7 +1305,8 @@
                     About Okilo
                 </div>
                 <h2>We are <span>Okilo Integrated Hub</span></h2>
-                <p>Founded in Nigeria, we blend technology with culture. From Danfo Hustle to e-commerce, we create digital products with meaning and impact.</p>
+                <p>Okilo Integrated Hub Ltd delivers cutting-edge solutions in gaming, web, and mobile development. As a product-driven company, OIH crafts scalable digital experiences that engage, educate, and empower users. Our flagship product, Danfo Hustle, is a culturally rich mobile game that channels the vibrancy and narrative spirit of African urban life. OIH oversees product development from ideation and strategic planning through branding and market launch. By collaborating with seasoned technology professionals and strategic partners, we blend creativity, technical mastery, and user-focused design to deliver outstanding digital products.</p>
+                <p style="font-size: 1.05rem; color: var(--text-light); margin-bottom: 32px; line-height: 1.7;">We provide web and app development services that empower startups, businesses, and organizations to create scalable, dependable, and intuitive digital products.</p>
                 
                 <div class="feature-grid">
                     <div class="feature-item">
@@ -1478,6 +1547,52 @@
         </div>
     </section>
 
+    <!-- FAQ Section -->
+    <section id="faq" class="section faq-section">
+        <div class="container">
+            <div class="section-header text-center">
+                <div class="section-label">
+                    <i class="bi bi-patch-question-fill"></i>
+                    Got Questions?
+                </div>
+                <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
+                <p class="section-desc" style="margin: 0 auto;">Everything you need to know about Okilo Integrated Hub.</p>
+            </div>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        What does Okilo Integrated Hub do?
+                        <i class="bi bi-plus-circle-fill"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Okilo Integrated Hub Ltd stands out by developing innovative, culturally relevant technology that uniquely entertains, educates, and empowers communities locally and globally.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Where is Okilo Integrated Hub located?
+                        <i class="bi bi-plus-circle-fill"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We are located at Shop D-312, Road 2, Ikota Shopping Complex, Lekki, Eti-Osa, Lagos, Nigeria.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Is Okilo Integrated Hub a registered company?
+                        <i class="bi bi-plus-circle-fill"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, Okilo Integrated Hub is registered with the Corporate Affairs Commission of Nigeria.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="section">
         <div class="container contact-grid">
@@ -1569,6 +1684,7 @@
                         <li><a href="#services">Services</a></li>
                         <li><a href="#about">About Us</a></li>
                         <li><a href="#danfo">Danfo Hustle</a></li>
+                        <li><a href="#faq">FAQ</a></li>
                     </ul>
                 </div>
                 
@@ -1644,6 +1760,16 @@
 
         document.querySelectorAll('.fade-in').forEach(el => {
             observer.observe(el);
+        });
+
+        // FAQ accordion
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.closest('.faq-item');
+                const isOpen = item.classList.contains('open');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+                if (!isOpen) item.classList.add('open');
+            });
         });
 
         // Form submission
