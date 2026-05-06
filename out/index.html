@@ -1,1832 +1,1867 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Okilo Integrated Hub | Digital Innovation Hub</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <style>
-        /* === CLEAN RESET === */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            /* Primary Palette */
-            --primary: #0f172a;        /* Deep Navy */
-            --secondary: #f59e0b;      /* Warm Gold */
-            --accent: #3b82f6;         /* Tech Blue */
-            --surface: #ffffff;        /* Pure White */
-            --background: #f8fafc;     /* Light Gray */
-            --text: #1e293b;           /* Dark Text */
-            --text-light: #64748b;     /* Muted Text */
-            
-            /* Gradients */
-            --gradient-hero: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
-            --gradient-gold: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
-            
-            /* Shadows */
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
-            --shadow-glow: 0 0 20px rgba(245, 158, 11, 0.3);
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: var(--text);
-            background-color: var(--background);
-        }
-
-        /* === UTILITY CLASSES === */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        .section {
-            padding: 100px 0;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        /* === TYPOGRAPHY === */
-        h1, h2, h3, h4 {
-            line-height: 1.2;
-            font-weight: 700;
-        }
-
-        .section-header {
-            margin-bottom: 60px;
-        }
-
-        .section-label {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--secondary);
-            margin-bottom: 16px;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 16px;
-        }
-
-        .section-title span {
-            color: var(--secondary);
-        }
-
-        .section-desc {
-            font-size: 1.125rem;
-            color: var(--text-light);
-            max-width: 600px;
-        }
-
-        /* === BUTTONS === */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 32px;
-            border-radius: 12px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .btn-primary {
-            background: var(--gradient-gold);
-            color: var(--primary);
-            box-shadow: var(--shadow-md);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-glow), var(--shadow-lg);
-        }
-
-        .btn-secondary {
-            background: var(--primary);
-            color: white;
-            box-shadow: var(--shadow-md);
-        }
-
-        .btn-secondary:hover {
-            background: #1e293b;
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: white;
-            border: 2px solid rgba(255,255,255,0.3);
-        }
-
-        .btn-outline:hover {
-            background: white;
-            color: var(--primary);
-            border-color: white;
-        }
-
-        /* === HEADER === */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-        }
-
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 80px;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--primary);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--gradient-gold);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-        }
-
-        .nav {
-            display: flex;
-            gap: 40px;
-            list-style: none;
-        }
-
-        .nav a {
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 500;
-            font-size: 0.95rem;
-            position: relative;
-            transition: color 0.3s;
-        }
-
-        .nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--secondary);
-            transition: width 0.3s;
-        }
-
-        .nav a:hover {
-            color: var(--secondary);
-        }
-
-        .nav a:hover::after {
-            width: 100%;
-        }
-
-        /* === HERO === */
-        .hero {
-            background: var(--gradient-hero);
-            color: white;
-            padding: 160px 0 100px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.4;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 24px;
-            line-height: 1.1;
-        }
-
-        .hero-content h1 span {
-            color: var(--secondary);
-            display: block;
-        }
-
-        .hero-content p {
-            font-size: 1.25rem;
-            opacity: 0.9;
-            margin-bottom: 40px;
-            line-height: 1.7;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .hero-visual {
-            position: relative;
-        }
-
-        .hero-image {
-            width: 100%;
-            border-radius: 24px;
-            box-shadow: var(--shadow-xl);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .floating-card {
-            position: absolute;
-            background: white;
-            padding: 20px;
-            border-radius: 16px;
-            box-shadow: var(--shadow-xl);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .floating-card-1 {
-            top: -20px;
-            right: -20px;
-            animation-delay: 0s;
-        }
-
-        .floating-card-2 {
-            bottom: 40px;
-            left: -30px;
-            animation-delay: 1.5s;
-        }
-
-        .floating-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--gradient-gold);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-size: 1.5rem;
-        }
-
-        .floating-text {
-            color: var(--text);
-        }
-
-        .floating-text strong {
-            display: block;
-            font-size: 1.25rem;
-        }
-
-        .floating-text span {
-            font-size: 0.875rem;
-            color: var(--text-light);
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        /* === SERVICES === */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
-
-        .service-card {
-            background: var(--surface);
-            padding: 32px;
-            border-radius: 20px;
-            border: 1px solid rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--gradient-gold);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-xl);
-            border-color: rgba(245, 158, 11, 0.2);
-        }
-
-        .service-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .service-icon {
-            width: 64px;
-            height: 64px;
-            background: rgba(245, 158, 11, 0.1);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 24px;
-            color: var(--secondary);
-            font-size: 1.75rem;
-            transition: all 0.3s;
-        }
-
-        .service-card:hover .service-icon {
-            background: var(--gradient-gold);
-            color: var(--primary);
-            transform: scale(1.1);
-        }
-
-        .service-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 12px;
-            color: var(--primary);
-        }
-
-        .service-card p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* === ABOUT === */
-        .about {
-            background: var(--surface);
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-
-        .about-image-wrapper {
-            position: relative;
-        }
-
-        .about-image {
-            width: 100%;
-            border-radius: 24px;
-            box-shadow: var(--shadow-xl);
-        }
-
-        .experience-badge {
-            position: absolute;
-            bottom: -20px;
-            right: -20px;
-            background: var(--gradient-gold);
-            color: var(--primary);
-            padding: 24px 32px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: var(--shadow-xl);
-        }
-
-        .experience-badge .number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            display: block;
-            line-height: 1;
-        }
-
-        .experience-badge .text {
-            font-size: 0.875rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .about-content h2 {
-            font-size: 2.5rem;
-            margin-bottom: 24px;
-            color: var(--primary);
-        }
-
-        .about-content h2 span {
-            color: var(--secondary);
-        }
-
-        .about-content > p {
-            font-size: 1.125rem;
-            color: var(--text-light);
-            margin-bottom: 32px;
-            line-height: 1.7;
-        }
-
-        .feature-grid {
-            display: grid;
-            gap: 20px;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            padding: 20px;
-            background: var(--background);
-            border-radius: 12px;
-            transition: all 0.3s;
-        }
-
-        .feature-item:hover {
-            background: rgba(245, 158, 11, 0.05);
-            transform: translateX(5px);
-        }
-
-        .feature-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--gradient-gold);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            flex-shrink: 0;
-        }
-
-        .feature-text h4 {
-            font-size: 1.1rem;
-            margin-bottom: 4px;
-            color: var(--primary);
-        }
-
-        .feature-text p {
-            font-size: 0.9rem;
-            color: var(--text-light);
-        }
-
-        /* === MISSION & VISION === */
-        .mission-section {
-            background: var(--background);
-        }
-
-        .mission-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-
-        .mission-card {
-            background: var(--surface);
-            padding: 48px;
-            border-radius: 24px;
-            box-shadow: var(--shadow-sm);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .mission-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 6px;
-            height: 100%;
-            background: var(--gradient-gold);
-        }
-
-        .mission-icon {
-            width: 72px;
-            height: 72px;
-            background: rgba(245, 158, 11, 0.1);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--secondary);
-            font-size: 2rem;
-            margin-bottom: 24px;
-        }
-
-        .mission-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 16px;
-            color: var(--primary);
-        }
-
-        .mission-card p {
-            color: var(--text-light);
-            line-height: 1.7;
-            font-size: 1.05rem;
-        }
-
-        /* === VALUES === */
-        .values-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 20px;
-            margin-top: 60px;
-        }
-
-        .value-card {
-            background: var(--surface);
-            padding: 32px 24px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .value-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-            border-color: rgba(245, 158, 11, 0.2);
-        }
-
-        .value-icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(245, 158, 11, 0.1);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            color: var(--secondary);
-            font-size: 1.5rem;
-            transition: all 0.3s;
-        }
-
-        .value-card:hover .value-icon {
-            background: var(--gradient-gold);
-            color: var(--primary);
-            transform: rotateY(360deg);
-        }
-
-        .value-card h4 {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            color: var(--primary);
-        }
-
-        .value-card p {
-            font-size: 0.875rem;
-            color: var(--text-light);
-        }
-
-        /* === DANFO HUSTLE === */
-        .danfo {
-            background: var(--primary);
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .danfo::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(245,158,11,0.1) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .danfo-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .danfo-content .section-label {
-            color: var(--secondary);
-        }
-
-        .danfo-content h2 {
-            font-size: 3rem;
-            margin-bottom: 24px;
-        }
-
-        .danfo-content h2 span {
-            color: var(--secondary);
-        }
-
-        .danfo-content > p {
-            font-size: 1.125rem;
-            opacity: 0.9;
-            margin-bottom: 32px;
-            line-height: 1.7;
-        }
-
-        .danfo-features {
-            list-style: none;
-            margin-bottom: 40px;
-        }
-
-        .danfo-features li {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-            font-size: 1.05rem;
-        }
-
-        .danfo-features i {
-            color: var(--secondary);
-            font-size: 1.25rem;
-        }
-
-        .danfo-visual {
-            position: relative;
-        }
-
-        .game-card {
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 24px;
-            padding: 24px;
-            position: relative;
-        }
-
-        .game-image {
-            width: 100%;
-            border-radius: 16px;
-            margin-bottom: 24px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-
-        .game-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
-        .stat {
-            background: rgba(255,255,255,0.05);
-            padding: 16px;
-            border-radius: 12px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .stat i {
-            color: var(--secondary);
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .stat span {
-            font-size: 0.875rem;
-            opacity: 0.9;
-        }
-
-        /* === PARTNERS === */
-        .partners-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
-
-        .partner-card {
-            background: var(--surface);
-            padding: 40px 32px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .partner-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-            border-color: rgba(245, 158, 11, 0.3);
-        }
-
-        .partner-logo {
-            width: 100px;
-            height: 100px;
-            background: var(--background);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 24px;
-            font-size: 2.5rem;
-            color: var(--secondary);
-            font-weight: 800;
-        }
-
-        .partner-card h4 {
-            font-size: 1.25rem;
-            margin-bottom: 8px;
-            color: var(--primary);
-        }
-
-        .partner-card p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-        }
-
-        /* === TESTIMONIALS === */
-        .testimonials {
-            background: var(--surface);
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
-
-        .testimonial-card {
-            background: var(--background);
-            padding: 40px;
-            border-radius: 20px;
-            position: relative;
-            transition: all 0.3s;
-        }
-        .logo {
-            height: 60px;      /* adjust to the height you want */
-            width: auto;       /* keeps the image ratio */
-            display: inline-block;
-            /* vertical-align: middle; */
-            margin: 25px;
-        }
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .quote-icon {
-            font-size: 3rem;
-            color: var(--secondary);
-            opacity: 0.3;
-            position: absolute;
-            top: 20px;
-            right: 24px;
-        }
-
-        .testimonial-card p {
-            color: var(--text);
-            font-size: 1.05rem;
-            line-height: 1.7;
-            margin-bottom: 24px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .client-info {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .client-avatar {
-            width: 48px;
-            height: 48px;
-            background: var(--gradient-gold);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 1.25rem;
-        }
-
-        .client-details h5 {
-            color: var(--primary);
-            font-size: 1rem;
-            margin-bottom: 2px;
-        }
-
-        .client-details span {
-            color: var(--text-light);
-            font-size: 0.875rem;
-        }
-
-        /* === CONTACT === */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 40px;
-        }
-
-        .contact-info-card {
-            background: var(--surface);
-            padding: 40px;
-            border-radius: 24px;
-            box-shadow: var(--shadow-sm);
-            height: fit-content;
-        }
-
-        .contact-info-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 32px;
-            color: var(--primary);
-        }
-
-        .contact-item {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 28px;
-        }
-
-        .contact-icon {
-            width: 52px;
-            height: 52px;
-            background: rgba(245, 158, 11, 0.1);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--secondary);
-            font-size: 1.25rem;
-            flex-shrink: 0;
-        }
-
-        .contact-details h4 {
-            font-size: 1rem;
-            margin-bottom: 4px;
-            color: var(--primary);
-        }
-
-        .contact-details a, .contact-details p {
-            color: var(--text-light);
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.3s;
-        }
-
-        .contact-details a:hover {
-            color: var(--secondary);
-        }
-
-        .contact-form-card {
-            background: var(--surface);
-            padding: 48px;
-            border-radius: 24px;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .contact-form-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 32px;
-            color: var(--primary);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 16px 20px;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-family: inherit;
-            transition: all 0.3s;
-            background: var(--background);
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--secondary);
-            background: white;
-            box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1);
-        }
-
-        textarea.form-control {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        /* === FAQ === */
-        .faq-section {
-            background: var(--surface);
-        }
-
-        .faq-list {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            border: 1px solid rgba(0,0,0,0.08);
-            border-radius: 16px;
-            margin-bottom: 16px;
-            overflow: hidden;
-            transition: box-shadow 0.3s;
-        }
-
-        .faq-item:hover {
-            box-shadow: var(--shadow-md);
-        }
-
-        .faq-question {
-            width: 100%;
-            background: none;
-            border: none;
-            padding: 24px 32px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            font-size: 1.05rem;
-            font-weight: 600;
-            color: var(--primary);
-            text-align: left;
-            gap: 16px;
-            font-family: inherit;
-        }
-
-        .faq-question i {
-            color: var(--secondary);
-            font-size: 1.25rem;
-            flex-shrink: 0;
-            transition: transform 0.3s;
-        }
-
-        .faq-item.open .faq-question i {
-            transform: rotate(45deg);
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease, padding 0.3s ease;
-        }
-
-        .faq-item.open .faq-answer {
-            max-height: 300px;
-        }
-
-        .faq-answer p {
-            padding: 0 32px 24px;
-            color: var(--text-light);
-            line-height: 1.7;
-            font-size: 1rem;
-        }
-
-        /* === FOOTER === */
-        .footer {
-            background: var(--primary);
-            color: #94a3b8;
-            padding: 80px 0 40px;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1.5fr;
-            gap: 60px;
-            margin-bottom: 60px;
-        }
-
-        .footer-brand .logo {
-            color: white;
-            margin-bottom: 20px;
-        }
-
-        .footer-brand p {
-            line-height: 1.7;
-            margin-bottom: 24px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 12px;
-        }
-
-        .social-links a {
-            width: 44px;
-            height: 44px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .social-links a:hover {
-            background: var(--secondary);
-            color: var(--primary);
-            transform: translateY(-3px);
-        }
-
-        .footer h4 {
-            color: white;
-            font-size: 1.1rem;
-            margin-bottom: 24px;
-        }
-
-        .footer ul {
-            list-style: none;
-        }
-
-        .footer li {
-            margin-bottom: 12px;
-        }
-
-        .footer a {
-            color: #94a3b8;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer a:hover {
-            color: var(--secondary);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 40px;
-            text-align: center;
-            color: #64748b;
-        }
-
-        /* === ANIMATIONS === */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* === RESPONSIVE === */
-        @media (max-width: 1024px) {
-            .services-grid { grid-template-columns: repeat(2, 1fr); }
-            .values-grid { grid-template-columns: repeat(3, 1fr); }
-            .partners-grid { grid-template-columns: repeat(2, 1fr); }
-            .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        @media (max-width: 768px) {
-            .nav { display: none; }
-            .hero-grid { grid-template-columns: 1fr; }
-            .hero-content h1 { font-size: 2.5rem; }
-            .about-grid { grid-template-columns: 1fr; gap: 40px; }
-            .mission-grid { grid-template-columns: 1fr; }
-            .danfo-grid { grid-template-columns: 1fr; }
-            .contact-grid { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
-            .services-grid { grid-template-columns: 1fr; }
-            .values-grid { grid-template-columns: repeat(2, 1fr); }
-            .partners-grid { grid-template-columns: 1fr; }
-            .testimonials-grid { grid-template-columns: 1fr; }
-            .floating-card { display: none; }
-            .section { padding: 60px 0; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Okilo Integrated Hub | Digital Innovation, African Identity</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════
+   ROOT & RESET
+═══════════════════════════════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --navy:    #002147;
+  --blue:    #396BB4;
+  --sky:     #b6dffa;
+  --gold:    #ffb700;
+  --white:   #ffffff;
+  --off:     #f4f6fb;
+  --muted:   #6b7a99;
+  --border:  rgba(57,107,180,.15);
+  --navy-80: rgba(0,33,71,.8);
+  --gold-10: rgba(255,183,0,.1);
+  --gold-20: rgba(255,183,0,.2);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--white);
+  color: var(--navy);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--navy); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
+
+/* ═══════════════════════════════════════════
+   UTILITIES
+═══════════════════════════════════════════ */
+.container { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+.section    { padding: 110px 0; }
+.section--dark  { background: var(--navy); color: var(--white); }
+.section--off   { background: var(--off); }
+.section--sky   { background: var(--sky); }
+
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 11px; font-weight: 600; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 20px;
+}
+.eyebrow::before {
+  content: ''; display: block; width: 28px; height: 2px;
+  background: var(--gold);
+}
+
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(44px, 5vw, 68px);
+  line-height: .95; letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+.section-title em { font-style: normal; color: var(--gold); }
+
+.section-desc {
+  font-size: 16px; line-height: 1.85;
+  color: var(--muted); max-width: 560px;
+}
+
+.divider-gold {
+  width: 52px; height: 3px;
+  background: var(--gold); margin: 20px 0 32px;
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 15px 34px; font-size: 13px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: all .3s cubic-bezier(.4,0,.2,1);
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-gold {
+  background: var(--gold); color: var(--navy);
+}
+.btn-gold:hover {
+  background: var(--navy); color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(255,183,0,.25);
+}
+.btn-outline-white {
+  background: transparent; color: var(--white);
+  border: 1.5px solid rgba(255,255,255,.4);
+}
+.btn-outline-white:hover {
+  background: var(--white); color: var(--navy);
+  border-color: var(--white);
+}
+.btn-navy {
+  background: var(--navy); color: var(--white);
+}
+.btn-navy:hover {
+  background: var(--blue); color: var(--white);
+  transform: translateY(-2px);
+}
+.btn-outline-navy {
+  background: transparent; color: var(--navy);
+  border: 1.5px solid var(--navy);
+}
+.btn-outline-navy:hover {
+  background: var(--navy); color: var(--white);
+}
+
+/* ── Fade-in ── */
+.reveal {
+  opacity: 0; transform: translateY(36px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: .1s; }
+.reveal-delay-2 { transition-delay: .2s; }
+.reveal-delay-3 { transition-delay: .3s; }
+.reveal-delay-4 { transition-delay: .4s; }
+
+/* ═══════════════════════════════════════════
+   HEADER / NAV
+═══════════════════════════════════════════ */
+.header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(0,33,71,.97);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,183,0,.12);
+  transition: all .3s;
+}
+.header-inner {
+  display: flex; align-items: center;
+  justify-content: space-between; height: 76px;
+}
+.logo-wrap {
+  display: flex; align-items: center; gap: 12px;
+  text-decoration: none;
+}
+.logo-mark {
+  width: 120px; height: 120px;
+  /* background: var(--gold); */
+  display: flex;
+  overflow: hidden;
+}
+.logo-mark img { width: 100%; height: 100%; object-fit: cover; }
+.logo-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px; letter-spacing: 2px; color: var(--white);
+  line-height: 1.1;
+}
+.logo-text span { display: block; font-size: 11px; letter-spacing: 4px; color: var(--sky); font-family: 'DM Sans', sans-serif; font-weight: 500; text-transform: uppercase; }
+
+.nav-links {
+  display: flex; gap: 36px; list-style: none; align-items: center;
+}
+.nav-links a {
+  font-size: 12px; font-weight: 500; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(255,255,255,.7);
+  text-decoration: none; transition: color .2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0;
+  width: 0; height: 1px; background: var(--gold);
+  transition: width .3s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  background: var(--gold); color: var(--navy) !important;
+  padding: 10px 22px; font-weight: 700 !important;
+}
+.nav-cta::after { display: none !important; }
+.nav-cta:hover { background: var(--white) !important; }
+
+/* Hamburger */
+.hamburger {
+  display: none; flex-direction: column;
+  gap: 5px; cursor: pointer; padding: 4px;
+  background: none; border: none;
+}
+.hamburger span {
+  display: block; width: 26px; height: 2px;
+  background: var(--white); transition: all .3s;
+}
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+.mobile-nav {
+  display: none; flex-direction: column;
+  background: var(--navy); padding: 24px 28px 32px;
+  border-top: 1px solid rgba(255,183,0,.15);
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a {
+  font-size: 13px; letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,255,255,.8); text-decoration: none;
+  padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.07);
+  font-weight: 500;
+}
+.mobile-nav a:last-child { border-bottom: none; }
+.mobile-nav a:hover { color: var(--gold); }
+
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+.hero {
+  background: var(--navy);
+  min-height: 100vh;
+  display: flex; align-items: center;
+  position: relative; overflow: hidden;
+  padding: 120px 0 80px;
+}
+/* geometric background pattern */
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(57,107,180,.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57,107,180,.08) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+.hero-glow {
+  position: absolute; top: -200px; right: -200px;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(255,183,0,.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-glow-2 {
+  position: absolute; bottom: -200px; left: -100px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(57,107,180,.12) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 64px; align-items: center;
+  position: relative; z-index: 1;
+}
+.hero-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 10px; letter-spacing: 4px; font-weight: 600;
+  text-transform: uppercase; color: var(--sky);
+  border: 1px solid rgba(182,223,250,.3);
+  padding: 8px 16px; margin-bottom: 28px;
+}
+.hero-label i { color: var(--gold); }
+.hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(56px, 7vw, 92px);
+  line-height: .9; letter-spacing: 1px;
+  color: var(--white); margin-bottom: 28px;
+}
+.hero h1 em { font-style: normal; color: var(--gold); display: block; }
+.hero-desc {
+  font-size: 17px; line-height: 1.8;
+  color: rgba(255,255,255,.65);
+  margin-bottom: 44px; max-width: 480px;
+}
+.hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+.hero-stats {
+  display: flex; gap: 40px; margin-top: 52px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255,255,255,.1);
+}
+.h-stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 42px; color: var(--gold); line-height: 1;
+}
+.h-stat-label {
+  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,255,255,.4); margin-top: 4px;
+}
+.hero-visual {
+  position: relative; display: flex;
+  justify-content: center; align-items: center;
+}
+.hero-img-frame {
+  position: relative; width: 100%;
+}
+.hero-img-frame img {
+  width: 100%; border-radius: 0;
+  display: block;
+  box-shadow: 0 40px 100px rgba(0,0,0,.5);
+}
+.hero-img-frame::before {
+  content: '';
+  position: absolute; top: -14px; left: -14px;
+  right: 14px; bottom: 14px;
+  border: 1.5px solid rgba(255,183,0,.3);
+  pointer-events: none; z-index: 1;
+}
+.hero-badge {
+  position: absolute; bottom: -24px; right: -20px;
+  background: var(--gold); color: var(--navy);
+  padding: 20px 28px; z-index: 2;
+  text-align: center;
+}
+.hero-badge-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px; line-height: 1;
+}
+.hero-badge-label {
+  font-size: 10px; letter-spacing: 2px; font-weight: 700;
+  text-transform: uppercase;
+}
+.hero-badge-2 {
+  position: absolute; top: -20px; left: -20px;
+  background: var(--blue); color: var(--white);
+  padding: 16px 22px; z-index: 2;
+}
+.hero-badge-2 .hero-badge-num { font-size: 28px; }
+
+/* scroll indicator */
+.scroll-hint {
+  position: absolute; bottom: 32px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: rgba(255,255,255,.35); font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; z-index: 2;
+  animation: bobble 2s ease-in-out infinite;
+}
+.scroll-hint i { font-size: 20px; }
+@keyframes bobble { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+/* ═══════════════════════════════════════════
+   MARQUEE STRIP
+═══════════════════════════════════════════ */
+.marquee-strip {
+  background: var(--gold); overflow: hidden;
+  padding: 16px 0; white-space: nowrap;
+}
+.marquee-track {
+  display: inline-flex; gap: 0;
+  animation: marquee 22s linear infinite;
+}
+.marquee-item {
+  display: inline-flex; align-items: center; gap: 16px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px; letter-spacing: 3px;
+  color: var(--navy); padding: 0 40px;
+}
+.marquee-item i { font-size: 16px; opacity: .5; }
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ═══════════════════════════════════════════
+   SERVICES
+═══════════════════════════════════════════ */
+.services-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border);
+}
+.service-card {
+  background: var(--white); padding: 44px 36px;
+  position: relative; overflow: hidden;
+  transition: all .35s ease;
+}
+.service-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0;
+  width: 0; height: 3px; background: var(--gold);
+  transition: width .4s ease;
+}
+.service-card:hover::after { width: 100%; }
+.service-card:hover { background: var(--navy); }
+.service-card:hover .s-icon,
+.service-card:hover .s-title,
+.service-card:hover .s-desc { color: var(--white); }
+.service-card:hover .s-icon { background: var(--gold-20); }
+.s-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 60px; color: rgba(57,107,180,.1);
+  line-height: 1; margin-bottom: 16px;
+  transition: color .3s;
+}
+.service-card:hover .s-num { color: rgba(255,183,0,.12); }
+.s-icon {
+  width: 54px; height: 54px;
+  background: var(--gold-10);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; color: var(--gold);
+  margin-bottom: 22px; transition: all .3s;
+}
+.s-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px; letter-spacing: 1px;
+  color: var(--navy); margin-bottom: 12px;
+  transition: color .3s;
+}
+.s-desc {
+  font-size: 14px; line-height: 1.75;
+  color: var(--muted); transition: color .3s;
+}
+
+/* ═══════════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════════ */
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+}
+.about-img-stack {
+  position: relative;
+}
+.about-img-main {
+  width: 100%; display: block;
+  box-shadow: 0 30px 80px rgba(0,33,71,.2);
+}
+.about-img-accent {
+  position: absolute; bottom: -32px; right: -32px;
+  width: 55%; height: 55%;
+  object-fit: cover;
+  border: 6px solid var(--white);
+  box-shadow: 0 20px 50px rgba(0,33,71,.2);
+  display: block;
+}
+.about-badge {
+  position: absolute; top: 28px; left: -28px;
+  background: var(--navy); color: var(--white);
+  padding: 24px 28px; z-index: 2;
+  border-left: 4px solid var(--gold);
+}
+.about-badge-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 44px; color: var(--gold); line-height: 1;
+}
+.about-badge-txt {
+  font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--sky);
+  margin-top: 4px;
+}
+.about-features {
+  display: flex; flex-direction: column; gap: 4px;
+  margin: 32px 0 40px;
+}
+.about-feat {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 18px 20px; background: var(--off);
+  transition: background .25s;
+}
+.about-feat:hover { background: var(--sky); }
+.feat-icon {
+  width: 40px; height: 40px; flex-shrink: 0;
+  background: var(--gold); color: var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.feat-title {
+  font-weight: 600; font-size: 15px;
+  color: var(--navy); margin-bottom: 2px;
+}
+.feat-desc { font-size: 13px; color: var(--muted); }
+
+/* ═══════════════════════════════════════════
+   MISSION / VISION
+═══════════════════════════════════════════ */
+.mv-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+}
+.mv-card {
+  padding: 52px 48px;
+  position: relative; overflow: hidden;
+}
+.mv-card--mission { background: var(--navy); }
+.mv-card--vision  { background: var(--blue); }
+.mv-card::before {
+  content: '';
+  position: absolute; bottom: -60px; right: -60px;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: rgba(255,183,0,.06);
+  pointer-events: none;
+}
+.mv-icon {
+  width: 64px; height: 64px;
+  border: 1.5px solid rgba(255,183,0,.4);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px; color: var(--gold);
+  margin-bottom: 28px;
+}
+.mv-card h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px; color: var(--white); letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+.mv-card p {
+  font-size: 15px; line-height: 1.85;
+  color: rgba(255,255,255,.7);
+}
+
+/* Values */
+.values-header {
+  text-align: center; margin-bottom: 56px;
+}
+.values-header .section-title { color: var(--navy); }
+.values-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 24px;
+}
+.val-card {
+  border: 1px solid var(--border);
+  padding: 36px 30px;
+  background: var(--white);
+  position: relative; overflow: hidden;
+  transition: all .3s;
+}
+.val-card:hover {
+  border-color: var(--gold); background: var(--navy);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(0,33,71,.15);
+}
+.val-card:hover .val-icon { background: var(--gold); color: var(--navy); }
+.val-card:hover .val-title { color: var(--white); }
+.val-card:hover .val-desc  { color: rgba(255,255,255,.6); }
+.val-icon {
+  width: 52px; height: 52px;
+  background: var(--gold-10); color: var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; margin-bottom: 20px;
+  transition: all .3s;
+}
+.val-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px; letter-spacing: 1px;
+  color: var(--navy); margin-bottom: 10px;
+  transition: color .3s;
+}
+.val-desc { font-size: 13px; line-height: 1.75; color: var(--muted); transition: color .3s; }
+
+/* ═══════════════════════════════════════════
+   FOUNDER — Option 3 (Bold Dark Minimal)
+═══════════════════════════════════════════ */
+.founder-section {
+  background: #070e1a;
+  position: relative; overflow: hidden;
+}
+.founder-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(57,107,180,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57,107,180,.06) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+}
+.founder-glow {
+  position: absolute; top: -300px; right: -300px;
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(57,107,180,.12) 0%, transparent 65%);
+  pointer-events: none;
+}
+.founder-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  position: relative; z-index: 1;
+}
+.founder-left {
+  padding: 100px 64px 100px 0;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.founder-big-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 200px; line-height: .8;
+  color: rgba(57,107,180,.1);
+  position: absolute; top: 20px; left: 0;
+  pointer-events: none; letter-spacing: -4px;
+}
+.founder-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(56px, 6vw, 80px);
+  line-height: .9; letter-spacing: 2px;
+  color: var(--white); margin-bottom: 8px;
+}
+.founder-role {
+  font-size: 12px; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 36px;
+}
+.founder-bio {
+  font-size: 15px; line-height: 1.9;
+  color: rgba(255,255,255,.5); margin-bottom: 40px;
+}
+.founder-bio strong { color: rgba(255,255,255,.8); font-weight: 500; }
+.founder-badges {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin-bottom: 44px;
+}
+.f-badge {
+  border: 1px solid rgba(57,107,180,.4);
+  color: var(--sky); font-size: 10px;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 8px 18px; transition: all .2s;
+}
+.f-badge:hover { border-color: var(--gold); color: var(--gold); }
+.founder-right {
+  position: relative; overflow: hidden;
+}
+.founder-right img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  filter: grayscale(30%) contrast(1.08);
+}
+.founder-right::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    linear-gradient(to right, #070e1a 0%, transparent 25%),
+    linear-gradient(180deg, transparent 55%, rgba(7,14,26,.7) 100%);
+}
+.founder-accent {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 4px; z-index: 3;
+  background: linear-gradient(90deg, var(--gold), var(--blue));
+}
+
+/* ═══════════════════════════════════════════
+   DANFO HUSTLE
+═══════════════════════════════════════════ */
+.danfo-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+}
+.danfo-list {
+  list-style: none; margin: 28px 0 40px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.danfo-list li {
+  display: flex; align-items: center; gap: 14px;
+  font-size: 15px; color: rgba(255,255,255,.8);
+}
+.danfo-list i { color: var(--gold); font-size: 18px; flex-shrink: 0; }
+.danfo-visual-card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  padding: 24px;
+}
+.danfo-visual-card img {
+  width: 100%; display: block; margin-bottom: 20px;
+  border: 1px solid rgba(255,255,255,.06);
+}
+.danfo-game-stats {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+}
+.dg-stat {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+  padding: 16px; text-align: center;
+}
+.dg-stat i { color: var(--gold); font-size: 22px; margin-bottom: 8px; display: block; }
+.dg-stat span { font-size: 12px; color: rgba(255,255,255,.6); letter-spacing: 1px; }
+
+/* ═══════════════════════════════════════════
+   PARTNERS
+═══════════════════════════════════════════ */
+.partners-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 24px;
+}
+.partner-card {
+  border: 1px solid var(--border); padding: 48px 36px;
+  text-align: center; transition: all .3s;
+  background: var(--white); position: relative; overflow: hidden;
+}
+.partner-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 3px; height: 0;
+  background: var(--gold); transition: height .35s;
+}
+.partner-card:hover::before { height: 100%; }
+.partner-card:hover { box-shadow: 0 20px 60px rgba(0,33,71,.12); }
+.partner-logo {
+  height: 100px; width: auto; margin: 0 auto 24px;
+  display: block; max-width: 180px; object-fit: contain;
+}
+.partner-card h4 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px; letter-spacing: 1px;
+  color: var(--navy); margin-bottom: 8px;
+}
+.partner-card p { font-size: 13px; color: var(--muted); }
+
+/* ═══════════════════════════════════════════
+   TESTIMONIALS
+═══════════════════════════════════════════ */
+.testi-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 24px;
+}
+.testi-card {
+  background: var(--white); padding: 40px;
+  border: 1px solid var(--border);
+  position: relative; transition: all .3s;
+}
+.testi-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0;
+  width: 0; height: 3px; background: var(--gold);
+  transition: width .4s;
+}
+.testi-card:hover::after { width: 100%; }
+.testi-card:hover { box-shadow: 0 20px 50px rgba(0,33,71,.1); }
+.testi-quote {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 80px; color: var(--gold-20);
+  line-height: .7; margin-bottom: 16px; display: block;
+}
+.testi-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px; line-height: 1.7;
+  color: var(--navy); font-style: italic;
+  margin-bottom: 28px;
+}
+.testi-author {
+  display: flex; align-items: center; gap: 14px;
+}
+.testi-avatar {
+  width: 46px; height: 46px;
+  background: var(--navy); color: var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Bebas Neue', sans-serif; font-size: 18px;
+}
+.testi-name { font-weight: 600; font-size: 14px; color: var(--navy); }
+.testi-role { font-size: 12px; color: var(--muted); }
+
+/* ═══════════════════════════════════════════
+   FAQ
+═══════════════════════════════════════════ */
+.faq-wrap { max-width: 760px; margin: 0 auto; }
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+.faq-q {
+  width: 100%; background: none; border: none;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 24px 0; gap: 16px; cursor: pointer;
+  font-size: 16px; font-weight: 600; color: var(--navy);
+  text-align: left; font-family: 'DM Sans', sans-serif;
+  transition: color .2s;
+}
+.faq-q:hover { color: var(--blue); }
+.faq-q i {
+  flex-shrink: 0; font-size: 20px; color: var(--gold);
+  transition: transform .3s;
+}
+.faq-item.open .faq-q i { transform: rotate(45deg); }
+.faq-ans {
+  max-height: 0; overflow: hidden;
+  transition: max-height .45s ease, padding .3s;
+}
+.faq-item.open .faq-ans { max-height: 240px; }
+.faq-ans p {
+  padding-bottom: 24px; font-size: 15px;
+  line-height: 1.8; color: var(--muted);
+}
+
+/* ═══════════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════════ */
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 1.6fr; gap: 40px;
+  align-items: start;
+}
+.contact-info {
+  background: var(--navy); padding: 52px 44px;
+  position: relative; overflow: hidden;
+}
+.contact-info::before {
+  content: '';
+  position: absolute; bottom: -80px; right: -80px;
+  width: 240px; height: 240px;
+  border-radius: 50%;
+  background: rgba(255,183,0,.06);
+}
+.contact-info h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px; color: var(--white); letter-spacing: 1px;
+  margin-bottom: 36px;
+}
+.c-item {
+  display: flex; gap: 16px; margin-bottom: 28px;
+}
+.c-icon {
+  width: 48px; height: 48px; flex-shrink: 0;
+  background: rgba(255,183,0,.15); color: var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+}
+.c-label {
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--sky); margin-bottom: 4px;
+}
+.c-val, .c-val a {
+  font-size: 14px; color: rgba(255,255,255,.8);
+  text-decoration: none; line-height: 1.6;
+  transition: color .2s;
+}
+.c-val a:hover { color: var(--gold); }
+.contact-form {
+  background: var(--white); padding: 52px 48px;
+  border: 1px solid var(--border);
+}
+.contact-form h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px; color: var(--navy); letter-spacing: 1px;
+  margin-bottom: 36px;
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { margin-bottom: 16px; }
+.form-control {
+  width: 100%; padding: 16px 18px;
+  border: 1.5px solid #dde3ef;
+  background: var(--off);
+  font-size: 14px; font-family: 'DM Sans', sans-serif;
+  color: var(--navy); outline: none;
+  transition: border-color .25s, background .25s;
+  border-radius: 0;
+}
+.form-control:focus {
+  border-color: var(--gold);
+  background: var(--white);
+  box-shadow: 0 0 0 3px var(--gold-10);
+}
+textarea.form-control { resize: vertical; min-height: 130px; }
+.form-submit { width: 100%; justify-content: center; padding: 18px; font-size: 13px; }
+.form-note {
+  text-align: center; font-size: 12px; color: var(--muted);
+  margin-top: 12px;
+}
+.form-note i { color: var(--gold); }
+
+/* Toast */
+.toast {
+  position: fixed; bottom: 32px; right: 32px;
+  background: var(--gold); color: var(--navy);
+  padding: 18px 28px; font-weight: 700;
+  font-size: 14px; z-index: 9999;
+  display: flex; align-items: center; gap: 10px;
+  animation: toastIn .3s ease;
+  box-shadow: 0 12px 40px rgba(255,183,0,.4);
+}
+@keyframes toastIn { from{transform:translateX(120px);opacity:0} to{transform:translateX(0);opacity:1} }
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+.footer { background: var(--navy); padding: 80px 0 0; }
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 60px; padding-bottom: 64px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.footer-brand p {
+  font-size: 14px; line-height: 1.8;
+  color: rgba(255,255,255,.45); margin: 20px 0 28px;
+  max-width: 300px;
+}
+.socials { display: flex; gap: 10px; }
+.socials a {
+  width: 42px; height: 42px;
+  border: 1px solid rgba(255,255,255,.15);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,.6); text-decoration: none;
+  font-size: 16px; transition: all .25s;
+}
+.socials a:hover { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+.footer-col h4 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px; letter-spacing: 2px; color: var(--white);
+  margin-bottom: 20px;
+}
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 10px; }
+.footer-col a {
+  font-size: 13px; color: rgba(255,255,255,.45);
+  text-decoration: none; transition: color .2s;
+  display: flex; align-items: center; gap: 8px;
+}
+.footer-col a:hover { color: var(--gold); }
+.footer-col a i { font-size: 14px; color: var(--blue); }
+.footer-bottom {
+  text-align: center; padding: 28px 0;
+  font-size: 12px; letter-spacing: 1px;
+  color: rgba(255,255,255,.25);
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .services-grid { grid-template-columns: repeat(2,1fr); }
+  .values-grid   { grid-template-columns: repeat(2,1fr); }
+  .testi-grid    { grid-template-columns: repeat(2,1fr); }
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+
+  .hero-inner    { grid-template-columns: 1fr; gap: 48px; }
+  .hero-visual   { order: -1; }
+  .hero-badge    { bottom: -16px; right: -8px; }
+  .hero-badge-2  { top: -12px; left: -8px; }
+
+  .about-grid    { grid-template-columns: 1fr; gap: 60px; }
+  .about-img-accent { display: none; }
+  .about-badge   { left: 0; top: 12px; }
+
+  .mv-grid        { grid-template-columns: 1fr; }
+  .values-grid    { grid-template-columns: 1fr; }
+  .founder-grid   { grid-template-columns: 1fr; }
+  .founder-right  { min-height: 340px; }
+  .founder-left   { padding: 72px 0 0; }
+
+  .danfo-grid     { grid-template-columns: 1fr; gap: 48px; }
+  .partners-grid  { grid-template-columns: 1fr; }
+  .testi-grid     { grid-template-columns: 1fr; }
+  .contact-grid   { grid-template-columns: 1fr; }
+  .footer-grid    { grid-template-columns: 1fr; gap: 40px; }
+  .form-row       { grid-template-columns: 1fr; }
+  .services-grid  { grid-template-columns: 1fr; }
+
+  .section { padding: 80px 0; }
+  .hero { padding: 100px 0 72px; min-height: auto; }
+  .hero-stats { gap: 24px; flex-wrap: wrap; }
+  .scroll-hint { display: none; }
+
+  .founder-big-num { font-size: 120px; }
+
+  .mv-card { padding: 40px 32px; }
+  .contact-form  { padding: 36px 28px; }
+  .contact-info  { padding: 36px 28px; }
+}
+
+@media (max-width: 480px) {
+  .hero h1 { font-size: 48px; }
+  .section-title { font-size: 40px; }
+  .hero-btns { flex-direction: column; }
+  .hero-btns .btn { width: 100%; justify-content: center; }
+}
+</style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header" id="header">
-        <div class="container header-content">
-            <a href="#" class="logo">
-                <div class="logo-icon">
-                    <img src="image.png" alt="Okilo Integrated Hub" class="logo">
-                </div>
-      
-            </a>
-            <nav>
-                <ul class="nav">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#danfo">Danfo Hustle</a></li>
-                    <li><a href="#partners">Partners</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+
+<!-- ═══════════ HEADER ═══════════ -->
+<header class="header" id="header">
+  <div class="container header-inner">
+    <a href="#" class="logo-wrap">
+      <div class="logo-mark">
+        <img src="icon.png" alt="Okilo Integrated Hub">
+      </div>
+      <!-- <div class="logo-text">
+        Okilo
+        <span>Integrated Hub</span>
+      </div> -->
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#founder">Founder</a></li>
+      <li><a href="#danfo">Danfo Hustle</a></li>
+      <li><a href="#partners">Partners</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
+    </ul>
+
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="#home">Home</a>
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#founder">Founder</a>
+    <a href="#danfo">Danfo Hustle</a>
+    <a href="#partners">Partners</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+
+<!-- ═══════════ HERO ═══════════ -->
+<section id="home" class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+  <div class="container hero-inner">
+    <div class="hero-content">
+      <div class="hero-label">
+        <i class="bi bi-stars"></i>
+        Lagos · Africa · World
+      </div>
+      <h1>
+        Transforming Ideas into
+        <em>Impactful Digital</em>
+        Experiences
+      </h1>
+      <p class="hero-desc">
+        We integrate creative approaches with technical expertise to develop high-quality digital products — rooted in African culture, built for the world.
+      </p>
+      <div class="hero-btns">
+        <a href="#services" class="btn btn-gold">
+          <i class="bi bi-arrow-right"></i> Explore Services
+        </a>
+        <a href="#contact" class="btn btn-outline-white">
+          <i class="bi bi-chat-dots"></i> Let's Talk
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="h-stat-num">50+</div>
+          <div class="h-stat-label">Projects Delivered</div>
         </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container hero-grid">
-            <div class="hero-content">
-                <div class="section-label">
-                    <i class="bi bi-stars"></i>
-                    Innovation meets purpose
-                </div>
-                <h1>
-                    Transforming Ideas into
-                    <span>Impactful Digital Experiences</span>
-                </h1>
-                <p>We integrate creative approaches with technical expertise to develop high-quality digital products and services.</p>
-                <div class="hero-buttons">
-                    <a href="#services" class="btn btn-primary">
-                        <i class="bi bi-arrow-right"></i>
-                        Explore Services
-                    </a>
-                    <a href="#contact" class="btn btn-outline">
-                        <i class="bi bi-chat-dots"></i>
-                        Let's Talk
-                    </a>
-                </div>
-            </div>
-            <div class="hero-visual">
-                <img src="image2.png" alt="Okilo Team" class="hero-image">
-                <div class="floating-card floating-card-1">
-                    <div class="floating-icon">
-                        <i class="bi bi-trophy-fill"></i>
-                    </div>
-                    <div class="floating-text">
-                        <strong>50+</strong>
-                        <span>Projects Delivered</span>
-                    </div>
-                </div>
-                <div class="floating-card floating-card-2">
-                    <div class="floating-icon">
-                        <i class="bi bi-heart-fill"></i>
-                    </div>
-                    <div class="floating-text">
-                        <strong>98%</strong>
-                        <span>Client Satisfaction</span>
-                    </div>
-                </div>
-            </div>
+        <div>
+          <div class="h-stat-num">98%</div>
+          <div class="h-stat-label">Client Satisfaction</div>
         </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="section">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">
-                    <i class="bi bi-grid-3x3-gap-fill"></i>
-                    What We Do
-                </div>
-                <h2 class="section-title">
-                    Crafting <span>Digital Excellence</span>
-                </h2>
-                <p class="section-desc">Okilo Integrated Hub creates technology-driven products and platforms grounded in culture. We focus on areas where mainstream technology has not adequately addressed cultural and human experiences, providing authentic, scalable solutions through collaboration and strategic partnerships.</p>
-            </div>
-
-            <div class="services-grid">
-                <div class="service-card fade-in">
-                    <div class="service-icon">
-                        <i class="bi bi-controller"></i>
-                    </div>
-                    <h3>Game Development</h3>
-                    <p>Including Danfo Hustle (endless runner + tycoon). Engaging, story-rich games that capture culture and imagination.</p>
-                </div>
-                
-                <div class="service-card fade-in">
-                    <div class="service-icon">
-                        <i class="bi bi-phone"></i>
-                    </div>
-                    <h3>Web & Mobile Apps</h3>
-                    <p>iOS, Android, PWAs, scalable platforms built with modern tech for seamless user experiences.</p>
-                </div>
-                
-                <div class="service-card fade-in">
-                    <div class="service-icon">
-                        <i class="bi bi-palette"></i>
-                    </div>
-                    <h3>UI/UX & Graphics</h3>
-                    <p>Stunning, intuitive brand identities and interfaces that users love to interact with.</p>
-                </div>
-                
-                <div class="service-card fade-in">
-                    <div class="service-icon">
-                        <i class="bi bi-cart3"></i>
-                    </div>
-                    <h3>E-commerce Solutions</h3>
-                    <p>Custom stores, secure payments, inventory management — everything to sell online.</p>
-                </div>
-                
-                <div class="service-card fade-in">
-                    <div class="service-icon">
-                        <i class="bi bi-cpu"></i>
-                    </div>
-                    <h3>Digital Solutions</h3>
-                    <p>SaaS, fintech, AI-powered tools that transform how businesses operate.</p>
-                </div>
-                
-                <div class="service-card fade-in">
-                    <div class="service-icon">
-                        <i class="bi bi-graph-up-arrow"></i>
-                    </div>
-                    <h3>Digital Marketing</h3>
-                    <p>Growth strategies, automation, brand positioning that gets measurable results.</p>
-                </div>
-            </div>
+        <div>
+          <div class="h-stat-num">5+</div>
+          <div class="h-stat-label">Years Experience</div>
         </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section about">
-        <div class="container about-grid">
-            <div class="about-image-wrapper">
-                <img src="office2.jpg" alt="Okilo Team" class="about-image">
-                <div class="experience-badge">
-                    <span class="number">5+</span>
-                    <span class="text">Years Experience</span>
-                </div>
-            </div>
-            <div class="about-content">
-                <div class="section-label">
-                    <i class="bi bi-building"></i>
-                    About Okilo
-                </div>
-                <h2>Who <span>Are We?</span></h2>
-                <p>Okilo Integrated Hub Ltd (OIH) is a Lagos-based technology and product company focused on transforming ideas into impactful, user-centered solutions. Founded by Okezie Chukukere, OIH operates at the intersection of culture, technology, and community, creating products that resonate locally and scale globally.</p>
-                <p style="font-size: 1.05rem; color: var(--text-light); margin-bottom: 24px; line-height: 1.7;">We are not a typical digital agency. As a product-focused company, our purpose is to use technology to foster meaningful human connections. We believe the most effective digital products reflect the stories and aspirations of the people they serve. From learning platforms to narrative-driven games, every venture we undertake begins with the user and is designed for measurable impact.</p>
-                <p style="font-size: 1.05rem; color: var(--text-light); margin-bottom: 32px; line-height: 1.7;">Headquartered in Lagos, Nigeria, OIH operates as a multi-venture hub, incubating, developing, and scaling distinct product brands. We are united by the belief that African stories deserve world-class platforms.</p>
-
-                <div class="feature-grid">
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="bi bi-globe-africa"></i>
-                        </div>
-                        <div class="feature-text">
-                            <h4>African Innovation</h4>
-                            <p>Creating solutions from our roots for a global impact</p>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="bi bi-globe2"></i>
-                        </div>
-                        <div class="feature-text">
-                            <h4>Global Vision</h4>
-                            <p>Building scalable products for a worldwide audience</p>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="bi bi-infinity"></i>
-                        </div>
-                        <div class="feature-text">
-                            <h4>Endless Impact</h4>
-                            <p>Empowering culture, technology, and people</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      </div>
+    </div>
+    <div class="hero-visual reveal reveal-delay-2">
+      <div class="hero-img-frame">
+        <img src="image2.png" alt="Okilo Integrated Hub Team" onerror="this.src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80'">
+        <div class="hero-badge">
+          <div class="hero-badge-num">5+</div>
+          <div class="hero-badge-label">Years Strong</div>
         </div>
-    </section>
-
-    <!-- Mission & Vision -->
-    <section class="section mission-section">
-        <div class="container">
-            <div class="mission-grid">
-                <div class="mission-card fade-in">
-                    <div class="mission-icon">
-                        <i class="bi bi-bullseye"></i>
-                    </div>
-                    <h3>Our Mission</h3>
-                    <p>We turn ideas into user-focused technology that preserves culture, amplifies underrepresented narratives, and shapes a creative, purposeful future. Our products connect communities, restore heritage, and empower users globally.</p>
-                </div>
-                <div class="mission-card fade-in">
-                    <div class="mission-icon">
-                        <i class="bi bi-eye"></i>
-                    </div>
-                    <h3>Our Vision</h3>
-                    <p>To become a globally recognized product house grounded in cultural identity, renowned for developing platforms that ensure narratives and culture are accessible, celebrated, and preserved for future generations. Each OIH product will establish a new benchmark for purposeful technology.</p>
-                </div>
-            </div>
-
-            <div class="text-center" style="margin-top: 80px;">
-                <h3 style="font-size: 2rem; margin-bottom: 40px; color: var(--primary);">Our Core Values</h3>
-                <div class="values-grid" style="grid-template-columns: repeat(3, 1fr);">
-                    <div class="value-card fade-in">
-                        <div class="value-icon">
-                            <i class="bi bi-globe-africa"></i>
-                        </div>
-                        <h4>Cultural Rootedness</h4>
-                        <p>Our products are grounded in cultural context. Culture is not an added feature; it is the foundation of our work. We believe technology is most effective when it reflects the lives and experiences of those it serves.</p>
-                    </div>
-                    <div class="value-card fade-in">
-                        <div class="value-icon">
-                            <i class="bi bi-lightbulb-fill"></i>
-                        </div>
-                        <h4>Purpose-Driven Innovation</h4>
-                        <p>We create experiences that entertain, educate, and foster empathy, while authentically representing underrepresented cultures.</p>
-                    </div>
-                    <div class="value-card fade-in">
-                        <div class="value-icon">
-                            <i class="bi bi-people-fill"></i>
-                        </div>
-                        <h4>Community & Collaborative Engagement</h4>
-                        <p>African culture is inherently communal. We reflect this by collaborating with elders, educators, artists, players, and parents, whose experiences inform and enhance our products. Our growth is shared.</p>
-                    </div>
-                    <div class="value-card fade-in">
-                        <div class="value-icon">
-                            <i class="bi bi-trophy-fill"></i>
-                        </div>
-                        <h4>Commitment to Excellence</h4>
-                        <p>We develop products for a global audience. African narratives deserve world-class execution, and we uphold this standard in design, engineering, content, and community engagement.</p>
-                    </div>
-                    <div class="value-card fade-in">
-                        <div class="value-icon">
-                            <i class="bi bi-shield-check"></i>
-                        </div>
-                        <h4>Integrity</h4>
-                        <p>We conduct business transparently, act honestly with partners and customers, and use data and technology ethically. We value the trust of the communities we serve above all.</p>
-                    </div>
-                    <div class="value-card fade-in">
-                        <div class="value-icon">
-                            <i class="bi bi-globe2"></i>
-                        </div>
-                        <h4>Diaspora & Homeland Unity</h4>
-                        <p>Our products connect Africans on the continent with those abroad. We recognize that heritage endures across distances and requires intentional cultivation. OIH develops tools to support this process worldwide.</p>
-                    </div>
-                </div>
-            </div>
+        <div class="hero-badge-2">
+          <div class="hero-badge-num">Lagos</div>
+          <div class="hero-badge-label">Nigeria</div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <i class="bi bi-chevron-double-down"></i>
+    Scroll
+  </div>
+</section>
 
-    <!-- Danfo Hustle Section -->
-    <section id="danfo" class="section danfo">
-        <div class="container danfo-grid">
-            <div class="danfo-content">
-                <div class="section-label">
-                    <i class="bi bi-rocket-takeoff"></i>
-                    Narrative Gaming
-                </div>
-                <h2>
-                    Danfo <span>Hustle</span>
-                </h2>
-                <p>Danfo Hustle is OIH's gaming label and one of its two flagship product lines. It offers story-driven, culturally grounded mobile games for a global audience, beginning with the streets of Lagos. The label captures the energy, complexity, and character of African urban life. Danfo Hustle aims to develop a catalog of narrative games, each set in a unique city, culture, or story world.</p>
-                <p style="font-size: 1.05rem; opacity: 0.9; margin-bottom: 24px; line-height: 1.7;">Lasgidi Payback is the first chapter — an arcade driving and narrative adventure game set in Lasgidi. Players enter the iconic yellow Danfo bus ecosystem of Lagos, navigate real routes, build transport empires, meet authentic characters, and complete community missions reflecting the city's vibrant culture. The game is more than entertainment; it serves as a tribute to Lagos, allowing Nigerians and Africans worldwide to see their world reflected in a world-class gaming experience.</p>
-                
-                <ul class="danfo-features">
-                    <li>
-                        <i class="bi bi-check-circle-fill"></i>
-                        Arcade driving & narrative adventure in Lasgidi
-                    </li>
-                    <li>
-                        <i class="bi bi-check-circle-fill"></i>
-                        Real Lagos routes & authentic characters
-                    </li>
-                    <li>
-                        <i class="bi bi-check-circle-fill"></i>
-                        Empire-building mechanics & fleet management
-                    </li>
-                    <li>
-                        <i class="bi bi-check-circle-fill"></i>
-                        Community missions & cultural events
-                    </li>
-                </ul>
-                
-                <a href="https://danfohustle.com" target="_blank" class="btn btn-primary">
-                    <i class="bi bi-play-circle-fill"></i>
-                    Play Danfo Hustle
-                </a>
-            </div>
-            
-            <div class="danfo-visual">
-                <div class="game-card">
-                    <img src="danfo-hustle-logo.jpg" alt="Danfo Hustle Game" class="game-image">
-                    <div class="game-stats">
-                        <div class="stat">
-                            <i class="bi bi-trophy"></i>
-                            <span>Weekly Races</span>
-                        </div>
-                        <div class="stat">
-                            <i class="bi bi-bus-front"></i>
-                            <span>Authentic Vibes</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+<!-- ═══════════ MARQUEE ═══════════ -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <!-- two copies for seamless loop -->
+    <span class="marquee-item"><i class="bi bi-dot"></i>Game Development</span>
+    <span class="marquee-item"><i class="bi bi-dot"></i>Web & Mobile Apps</span>
+    <span class="marquee-item"><i class="bi bi-dot"></i>UI/UX Design</span>
+    <span class="marquee-item"><i class="bi bi-dot"></i>E-Commerce</span>
+    <span class="marquee-item"><i class="bi bi-dot"></i>Digital Marketing</span>
+    <span class="marquee-item"><i class="bi bi-dot"></i>SaaS & Fintech</span>
+    <span class="marquee-item"><i class="bi bi-dot"></i>African Innovation</span>
+    <span class="marquee-item"><i class="bi bi-dot"></i>Game Development</span>
+    <span class="marquee-item"><i class="bi bi-dot"></i>Web & Mobile Apps</span>
+    <span class="marquee-item"><i class="bi bi-dot"></i>UI/UX Design</span>
+    <span class="marquee-item"><i class="bi bi-dot"></i>E-Commerce</span>
+    <span class="marquee-item"><i class="bi bi-dot"></i>Digital Marketing</span>
+    <span class="marquee-item"><i class="bi bi-dot"></i>SaaS & Fintech</span>
+    <span class="marquee-item"><i class="bi bi-dot"></i>African Innovation</span>
+  </div>
+</div>
+
+
+<!-- ═══════════ SERVICES ═══════════ -->
+<section id="services" class="section">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:56px">
+      <div class="eyebrow">What We Do</div>
+      <h2 class="section-title">Crafting <em>Digital</em><br>Excellence</h2>
+      <div class="divider-gold"></div>
+      <p class="section-desc">Okilo Integrated Hub creates technology-driven products and platforms grounded in culture. We focus on areas where mainstream technology has not adequately addressed cultural and human experiences.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="s-num">01</div>
+        <div class="s-icon"><i class="bi bi-controller"></i></div>
+        <div class="s-title">Game Development</div>
+        <p class="s-desc">Including Danfo Hustle (endless runner + tycoon). Engaging, story-rich games that capture culture and imagination.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="s-num">02</div>
+        <div class="s-icon"><i class="bi bi-phone"></i></div>
+        <div class="s-title">Web & Mobile Apps</div>
+        <p class="s-desc">iOS, Android, PWAs, scalable platforms built with modern tech for seamless user experiences across all devices.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="s-num">03</div>
+        <div class="s-icon"><i class="bi bi-palette"></i></div>
+        <div class="s-title">UI/UX & Graphics</div>
+        <p class="s-desc">Stunning, intuitive brand identities and interfaces that users love to interact with every single time.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="s-num">04</div>
+        <div class="s-icon"><i class="bi bi-cart3"></i></div>
+        <div class="s-title">E-Commerce Solutions</div>
+        <p class="s-desc">Custom stores, secure payments, inventory management — everything your business needs to sell online.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="s-num">05</div>
+        <div class="s-icon"><i class="bi bi-cpu"></i></div>
+        <div class="s-title">Digital Solutions</div>
+        <p class="s-desc">SaaS, fintech, AI-powered tools that transform how businesses operate at every level.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <div class="s-num">06</div>
+        <div class="s-icon"><i class="bi bi-graph-up-arrow"></i></div>
+        <div class="s-title">Digital Marketing</div>
+        <p class="s-desc">Growth strategies, automation, brand positioning that gets measurable, meaningful results.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════ ABOUT ═══════════ -->
+<section id="about" class="section section--off">
+  <div class="container about-grid">
+    <div class="about-img-stack reveal">
+      <img src="office2.jpg" alt="Okilo Integrated Hub" class="about-img-main"
+           onerror="this.src='https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80'">
+      <img src="image2.png" alt="Team" class="about-img-accent"
+           onerror="this.src='https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&q=80'">
+      <div class="about-badge">
+        <div class="about-badge-num">5+</div>
+        <div class="about-badge-txt">Years of Impact</div>
+      </div>
+    </div>
+    <div class="about-content reveal reveal-delay-2">
+      <div class="eyebrow">About Okilo</div>
+      <h2 class="section-title">Who <em>Are We?</em></h2>
+      <div class="divider-gold"></div>
+      <p style="font-size:15px;line-height:1.85;color:var(--muted);margin-bottom:16px">
+        Okilo Integrated Hub Ltd (OIH) is a Lagos-based technology and product company focused on transforming ideas into impactful, user-centered solutions. Founded by Okezie Chukukere, OIH operates at the intersection of culture, technology, and community.
+      </p>
+      <p style="font-size:15px;line-height:1.85;color:var(--muted);margin-bottom:24px">
+        We are not a typical digital agency. As a product-focused company, our purpose is to use technology to foster meaningful human connections. From learning platforms to narrative-driven games, every venture begins with the user and is designed for measurable impact.
+      </p>
+      <div class="about-features">
+        <div class="about-feat">
+          <div class="feat-icon"><i class="bi bi-globe-africa"></i></div>
+          <div>
+            <div class="feat-title">African Innovation</div>
+            <div class="feat-desc">Creating solutions from our roots for global impact</div>
+          </div>
         </div>
-    </section>
-
-    <!-- Partners Section -->
-    <section id="partners" class="section">
-        <div class="container">
-            <div class="section-header text-center">
-                <div class="section-label">
-                    <i class="bi bi-handshake"></i>
-                    Collaborations
-                </div>
-                <h2 class="section-title">Our <span>Partners</span></h2>
-                <p class="section-desc" style="margin: 0 auto;">Trusted by leading organizations in the creative and tech industry.</p>
-            </div>
-            
-            <div class="partners-grid">
-                <div class="partner-card fade-in">
-                    <img src="ac.png" alt="Africa Comicade" height="150px" width="250px" margin="20px">
-                    <h4>Africa Comicade</h4>
-                    <p>Empowering comic & game creators across the continent</p>
-                </div>
-                <div class="partner-card fade-in">
-                    <img src="g.png" alt="Africa Comicade" height="150px" width="250px" margin="20px">
-                    <h4>Gamathon</h4>
-                    <p>Premier gaming competitions and esports events</p>
-                </div>
-                <div class="partner-card fade-in">
-                    <img src="b.png" alt="Africa Comicade" height="150px" width="250px" margin="20px">
-                    <h4>Beyond Service</h4>
-                    <p>Exceptional customer experience solutions</p>
-                </div>
-            </div>
-            
-            <div class="text-center" style="margin-top: 60px;">
-                <a href="#contact" class="btn btn-secondary">
-                    <i class="bi bi-plus-circle"></i>
-                    Become a Partner
-                </a>
-            </div>
+        <div class="about-feat">
+          <div class="feat-icon"><i class="bi bi-globe2"></i></div>
+          <div>
+            <div class="feat-title">Global Vision</div>
+            <div class="feat-desc">Building scalable products for a worldwide audience</div>
+          </div>
         </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="section testimonials">
-        <div class="container">
-            <div class="section-header text-center">
-                <h2 class="section-title">Kind <span>Words</span></h2>
-                <p class="section-desc" style="margin: 0 auto;">What our clients say about working with us.</p>
-            </div>
-            
-            <div class="testimonials-grid">
-                <div class="testimonial-card fade-in">
-                    <i class="bi bi-quote quote-icon"></i>
-                    <p>Okilo transformed our digital presence completely. We saw a 300% increase in customer engagement within months of launching our new platform!</p>
-                    <div class="client-info">
-                        <div class="client-avatar">OC</div>
-                        <div class="client-details">
-                            <h5>Okezie Charles</h5>
-                            <span>CEO, Stellar Dynamics</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card fade-in">
-                    <i class="bi bi-quote quote-icon"></i>
-                    <p>The app they built for my startup is sleek, fast, and scalable. Truly a world-class team that understands modern tech and user needs.</p>
-                    <div class="client-info">
-                        <div class="client-avatar">SO</div>
-                        <div class="client-details">
-                            <h5>Solomon Ogbanuegwu</h5>
-                            <span>Managing Director, Carbonex</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card fade-in">
-                    <i class="bi bi-quote quote-icon"></i>
-                    <p>Innovative, efficient, and professional — they're simply the best in the business. Our go-to team for all digital projects.</p>
-                    <div class="client-info">
-                        <div class="client-avatar">CJ</div>
-                        <div class="client-details">
-                            <h5>CJ Michael</h5>
-                            <span>Whitemoon Integrated</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="about-feat">
+          <div class="feat-icon"><i class="bi bi-infinity"></i></div>
+          <div>
+            <div class="feat-title">Endless Impact</div>
+            <div class="feat-desc">Empowering culture, technology, and people</div>
+          </div>
         </div>
-    </section>
+      </div>
+      <a href="#contact" class="btn btn-navy">
+        <i class="bi bi-arrow-right"></i> Work With Us
+      </a>
+    </div>
+  </div>
+</section>
 
-    <!-- FAQ Section -->
-    <section id="faq" class="section faq-section">
-        <div class="container">
-            <div class="section-header text-center">
-                <div class="section-label">
-                    <i class="bi bi-patch-question-fill"></i>
-                    Got Questions?
-                </div>
-                <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
-                <p class="section-desc" style="margin: 0 auto;">Everything you need to know about Okilo Integrated Hub.</p>
-            </div>
 
-            <div class="faq-list">
-                <div class="faq-item">
-                    <button class="faq-question">
-                        What does Okilo Integrated Hub do?
-                        <i class="bi bi-plus-circle-fill"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Okilo Integrated Hub Ltd stands out by developing innovative, culturally relevant technology that uniquely entertains, educates, and empowers communities locally and globally.</p>
-                    </div>
-                </div>
+<!-- ═══════════ MISSION / VISION ═══════════ -->
+<section class="section">
+  <div class="container">
+    <div class="mv-grid" style="margin-bottom:80px">
+      <div class="mv-card mv-card--mission reveal">
+        <div class="mv-icon"><i class="bi bi-bullseye"></i></div>
+        <h3>Our Mission</h3>
+        <p>We turn ideas into user-focused technology that preserves culture, amplifies underrepresented narratives, and shapes a creative, purposeful future. Our products connect communities, restore heritage, and empower users globally.</p>
+      </div>
+      <div class="mv-card mv-card--vision reveal reveal-delay-2">
+        <div class="mv-icon"><i class="bi bi-eye"></i></div>
+        <h3>Our Vision</h3>
+        <p>To become a globally recognized product house grounded in cultural identity — renowned for developing platforms that ensure African narratives are accessible, celebrated, and preserved for future generations.</p>
+      </div>
+    </div>
 
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Where is Okilo Integrated Hub located?
-                        <i class="bi bi-plus-circle-fill"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>We are located at Shop D-312, Road 2, Ikota Shopping Complex, Lekki, Eti-Osa, Lagos, Nigeria.</p>
-                    </div>
-                </div>
+    <div class="values-header reveal">
+      <div class="eyebrow" style="justify-content:center">Core Values</div>
+      <h2 class="section-title" style="color:var(--navy)">What <em>Drives</em> Us</h2>
+    </div>
+    <div class="values-grid">
+      <div class="val-card reveal">
+        <div class="val-icon"><i class="bi bi-globe-africa"></i></div>
+        <div class="val-title">Cultural Rootedness</div>
+        <p class="val-desc">Our products are grounded in cultural context. Culture is not an added feature — it is the foundation of our work.</p>
+      </div>
+      <div class="val-card reveal reveal-delay-1">
+        <div class="val-icon"><i class="bi bi-lightbulb-fill"></i></div>
+        <div class="val-title">Purpose-Driven Innovation</div>
+        <p class="val-desc">We create experiences that entertain, educate, and foster empathy while authentically representing underrepresented cultures.</p>
+      </div>
+      <div class="val-card reveal reveal-delay-2">
+        <div class="val-icon"><i class="bi bi-people-fill"></i></div>
+        <div class="val-title">Community Engagement</div>
+        <p class="val-desc">We collaborate with elders, educators, artists, players, and parents whose experiences inform and enhance our products.</p>
+      </div>
+      <div class="val-card reveal">
+        <div class="val-icon"><i class="bi bi-trophy-fill"></i></div>
+        <div class="val-title">Commitment to Excellence</div>
+        <p class="val-desc">African narratives deserve world-class execution. We uphold this standard in design, engineering, content, and community.</p>
+      </div>
+      <div class="val-card reveal reveal-delay-1">
+        <div class="val-icon"><i class="bi bi-shield-check"></i></div>
+        <div class="val-title">Integrity</div>
+        <p class="val-desc">We conduct business transparently, act honestly with partners and customers, and use data and technology ethically.</p>
+      </div>
+      <div class="val-card reveal reveal-delay-2">
+        <div class="val-icon"><i class="bi bi-globe2"></i></div>
+        <div class="val-title">Diaspora & Homeland Unity</div>
+        <p class="val-desc">Our products connect Africans on the continent with those abroad. Heritage endures across distances and requires intentional cultivation.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Is Okilo Integrated Hub a registered company?
-                        <i class="bi bi-plus-circle-fill"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Yes, Okilo Integrated Hub is registered with the Corporate Affairs Commission of Nigeria.</p>
-                    </div>
-                </div>
-            </div>
+
+<!-- ═══════════ FOUNDER ═══════════ -->
+<section id="founder" class="founder-section section">
+  <div class="founder-glow"></div>
+  <div class="container">
+    <div class="founder-grid">
+      <div class="founder-left reveal">
+        <div class="founder-big-num">01</div>
+        <div class="eyebrow">Meet the Founder</div>
+        <h2 class="founder-name">Okezie<br>Chukukere</h2>
+        <p class="founder-role">Founder & Chief Executive Officer</p>
+        <p class="founder-bio">
+          Okezie Chukukere is an entrepreneur, strategist, and ecosystem builder with a singular mission: to make Africa the world's next great innovation frontier. <strong>With roots in Lagos and a track record spanning multiple industries</strong>, he launched Okilo Integrated Hub to give Africa's next generation the tools, capital, and connections they need to win on a global stage.
+          <br><br>
+          <strong>His philosophy is simple</strong> — when you empower one entrepreneur and one story, you transform an entire community. Every product built at OIH is a direct expression of that belief.
+        </p>
+        <div class="founder-badges">
+          <span class="f-badge">Entrepreneur</span>
+          <span class="f-badge">Strategist</span>
+          <span class="f-badge">Ecosystem Builder</span>
+          <span class="f-badge">Mentor</span>
+          <span class="f-badge">Visionary</span>
         </div>
-    </section>
+        <a href="#contact" class="btn btn-gold">
+          <i class="bi bi-envelope"></i> Get in Touch
+        </a>
+      </div>
+      <div class="founder-right">
+        <img src="founder.png" alt="Okezie Chukukere — Founder"
+             onerror="this.src='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=700&q=80'">
+        <div class="founder-accent"></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-        <div class="container contact-grid">
-            <div class="contact-info-card fade-in">
-                <h3>Contact Information</h3>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="bi bi-geo-alt-fill"></i>
-                    </div>
-                    <div class="contact-details">
-                        <h4>Visit Us</h4>
-                        <p>
-                            Shop D-312, Road 2, Ikota Shopping Complex,<br>
-                            Lekki Eti-Osa, Lagos, Nigeria
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="bi bi-whatsapp"></i>
-                    </div>
-                    <div class="contact-details">
-                        <h4>WhatsApp</h4>
-                        <a href="https://wa.me/2348161133209">+234 816 113 3209</a>
-                    </div>
-                </div>
-                
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <i class="bi bi-envelope-fill"></i>
-                    </div>
-                    <div class="contact-details">
-                        <h4>Email</h4>
-                        <a href="mailto:info@okilointegratedhub.com">info@okilointegratedhub.com</a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="contact-form-card fade-in">
-                <h3>Send us a Message</h3>
-                <form id="contactForm">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Your full name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Email address" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Subject">
-                    </div>
-                    <div class="form-group">
-                        <textarea class="form-control" placeholder="Tell us about your project..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
-                        <i class="bi bi-send-fill"></i>
-                        Send Message
-                    </button>
-                </form>
-            </div>
+
+<!-- ═══════════ DANFO HUSTLE ═══════════ -->
+<section id="danfo" class="section section--dark">
+  <div class="container danfo-grid">
+    <div class="danfo-content reveal">
+      <div class="eyebrow">Narrative Gaming</div>
+      <h2 class="section-title">Danfo <em>Hustle</em></h2>
+      <div class="divider-gold"></div>
+      <p style="font-size:15px;line-height:1.85;color:rgba(255,255,255,.65);margin-bottom:12px">
+        Danfo Hustle is OIH's gaming label and one of its two flagship product lines. It offers story-driven, culturally grounded mobile games for a global audience, beginning with the streets of Lagos.
+      </p>
+      <p style="font-size:15px;line-height:1.85;color:rgba(255,255,255,.55)">
+        <strong style="color:rgba(255,255,255,.8)">Lasgidi Payback</strong> is the first chapter — an arcade driving and narrative adventure game set in Lagos. Players navigate real routes, build transport empires, meet authentic characters, and complete community missions.
+      </p>
+      <ul class="danfo-list">
+        <li><i class="bi bi-check-circle-fill"></i> Arcade driving & narrative adventure in Lasgidi</li>
+        <li><i class="bi bi-check-circle-fill"></i> Real Lagos routes & authentic characters</li>
+        <li><i class="bi bi-check-circle-fill"></i> Empire-building mechanics & fleet management</li>
+        <li><i class="bi bi-check-circle-fill"></i> Community missions & cultural events</li>
+      </ul>
+      <a href="https://danfohustle.com" target="_blank" class="btn btn-gold">
+        <i class="bi bi-play-circle-fill"></i> Play Danfo Hustle
+      </a>
+    </div>
+    <div class="danfo-visual reveal reveal-delay-2">
+      <div class="danfo-visual-card">
+        <img src="danfo-hustle-logo.jpg" alt="Danfo Hustle"
+             onerror="this.src='https://images.unsplash.com/photo-1511512578047-dfb367046420?w=700&q=80'">
+        <div class="danfo-game-stats">
+          <div class="dg-stat">
+            <i class="bi bi-trophy"></i>
+            <span>Weekly Races</span>
+          </div>
+          <div class="dg-stat">
+            <i class="bi bi-bus-front"></i>
+            <span>Authentic Vibes</span>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="#" class="logo">
-                        <div class="logo-icon">
-                            <img src="image.png" alt="Africa Comicade" height="50px" width="auto" margin="20px">
-                        </div>
-            
-                    </a>
-                    <p>We build products that preserve our culture, share our stories, and shape our future.</p>
-                    <div class="social-links">
-                        <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
-                    </div>
-                </div>
-                
-                <div>
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#danfo">Danfo Hustle</a></li>
-                        <li><a href="#faq">FAQ</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4>Services</h4>
-                    <ul>
-                        <li><a href="#services">Game Development</a></li>
-                        <li><a href="#services">Web & Mobile Apps</a></li>
-                        <li><a href="#services">UI/UX Design</a></li>
-                        <li><a href="#services">E-commerce</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4>Contact</h4>
-                    <ul>
-                        <li>
-                            <i class="bi bi-geo-alt"></i>
-                            Shop D-312, Road 2, Ikota Shopping Complex, Lekki Eti-Osa, Lagos, Nigeria
-                        </li>
-                        <li><i class="bi bi-whatsapp"></i> +234 816 113 3209</li>
-                        <li><i class="bi bi-envelope"></i> info@okilointegratedhub.com</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <!-- <p>&copy; 2025 Okilo Integrated Hub. All rights reserved. Crafted with <i class="bi bi-heart-fill" style="color: var(--secondary);"></i> in Lagos.</p> -->
-                <p>&copy; 2025 Okilo Integrated Hub. All rights reserved.</p>
-            </div>
+
+<!-- ═══════════ PARTNERS ═══════════ -->
+<section id="partners" class="section section--off">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:56px" class="reveal">
+      <div class="eyebrow" style="justify-content:center">Collaborations</div>
+      <h2 class="section-title" style="color:var(--navy)">Our <em>Partners</em></h2>
+      <div class="divider-gold" style="margin:20px auto 20px"></div>
+      <p class="section-desc" style="margin:0 auto;text-align:center">Trusted by leading organisations in the creative and tech industry.</p>
+    </div>
+    <div class="partners-grid">
+      <div class="partner-card reveal">
+        <img src="ac.png" alt="Africa Comicade" class="partner-logo"
+             onerror="this.style.display='none'">
+        <h4>Africa Comicade</h4>
+        <p>Empowering comic & game creators across the continent</p>
+      </div>
+      <div class="partner-card reveal reveal-delay-1">
+        <img src="g.png" alt="Gamathon" class="partner-logo"
+             onerror="this.style.display='none'">
+        <h4>Gamathon</h4>
+        <p>Premier gaming competitions and esports events</p>
+      </div>
+      <div class="partner-card reveal reveal-delay-2">
+        <img src="b.png" alt="Beyond Service" class="partner-logo"
+             onerror="this.style.display='none'">
+        <h4>Beyond Service</h4>
+        <p>Exceptional customer experience solutions</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:48px">
+      <a href="#contact" class="btn btn-outline-navy">
+        <i class="bi bi-plus-circle"></i> Become a Partner
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════ TESTIMONIALS ═══════════ -->
+<section class="section">
+  <div class="container">
+    <div style="margin-bottom:56px" class="reveal">
+      <div class="eyebrow">Kind Words</div>
+      <h2 class="section-title">What Clients <em>Say</em></h2>
+      <div class="divider-gold"></div>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <span class="testi-quote">"</span>
+        <p class="testi-text">Okilo transformed our digital presence completely. We saw a 300% increase in customer engagement within months of launching our new platform!</p>
+        <div class="testi-author">
+          <div class="testi-avatar">OC</div>
+          <div>
+            <div class="testi-name">Okezie Charles</div>
+            <div class="testi-role">CEO, Stellar Dynamics</div>
+          </div>
         </div>
-    </footer>
+      </div>
+      <div class="testi-card reveal reveal-delay-1">
+        <span class="testi-quote">"</span>
+        <p class="testi-text">The app they built for my startup is sleek, fast, and scalable. Truly a world-class team that understands modern tech and user needs.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">SO</div>
+          <div>
+            <div class="testi-name">Solomon Ogbanuegwu</div>
+            <div class="testi-role">Managing Director, Carbonex</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal reveal-delay-2">
+        <span class="testi-quote">"</span>
+        <p class="testi-text">Innovative, efficient, and professional — they're simply the best in the business. Our go-to team for all digital projects.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">CJ</div>
+          <div>
+            <div class="testi-name">CJ Michael</div>
+            <div class="testi-role">Whitemoon Integrated</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <script>
-        // Header scroll effect
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
-            } else {
-                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
-            }
-        });
 
-        // Smooth scroll for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+<!-- ═══════════ FAQ ═══════════ -->
+<section id="faq" class="section section--off">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:56px" class="reveal">
+      <div class="eyebrow" style="justify-content:center">Got Questions?</div>
+      <h2 class="section-title" style="color:var(--navy)">Frequently <em>Asked</em></h2>
+      <div class="divider-gold" style="margin:20px auto 0"></div>
+    </div>
+    <div class="faq-wrap">
+      <div class="faq-item reveal">
+        <button class="faq-q">What does Okilo Integrated Hub do? <i class="bi bi-plus-circle-fill"></i></button>
+        <div class="faq-ans"><p>Okilo Integrated Hub Ltd stands out by developing innovative, culturally relevant technology that uniquely entertains, educates, and empowers communities locally and globally.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Where is Okilo Integrated Hub located? <i class="bi bi-plus-circle-fill"></i></button>
+        <div class="faq-ans"><p>We are located at Shop D-312, Road 2, Ikota Shopping Complex, Lekki, Eti-Osa, Lagos, Nigeria.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Is Okilo Integrated Hub a registered company? <i class="bi bi-plus-circle-fill"></i></button>
+        <div class="faq-ans"><p>Yes, Okilo Integrated Hub is registered with the Corporate Affairs Commission of Nigeria.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">What kind of products do you build? <i class="bi bi-plus-circle-fill"></i></button>
+        <div class="faq-ans"><p>We build culturally grounded digital products including mobile games, web and mobile applications, e-commerce solutions, SaaS platforms, and UI/UX design systems — all with deep roots in African culture and community.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">How can I work with Okilo Integrated Hub? <i class="bi bi-plus-circle-fill"></i></button>
+        <div class="faq-ans"><p>Simply reach out via our contact section below or WhatsApp us at +234 816 113 3209. We'd love to hear about your idea and explore how we can bring it to life.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
+<!-- ═══════════ CONTACT ═══════════ -->
+<section id="contact" class="section">
+  <div class="container">
+    <div style="margin-bottom:56px" class="reveal">
+      <div class="eyebrow">Reach Out</div>
+      <h2 class="section-title">Let's <em>Build</em> Together</h2>
+      <div class="divider-gold"></div>
+      <p class="section-desc">Have a project in mind? Ready to transform your idea into a world-class digital product? We're just a message away.</p>
+    </div>
+    
+    <!-- Contact Options Grid -->
+    <div class="contact-options-grid">
+      <!-- WhatsApp Card -->
+      <div class="contact-option-card reveal">
+        <div class="card-icon whatsapp-icon">
+          <i class="bi bi-whatsapp"></i>
+        </div>
+        <h3>WhatsApp Us</h3>
+        <p>Quick replies within 24 hours. Click to start a conversation instantly.</p>
+        <a href="https://wa.me/2348161133209?text=Hello%21%20I%20would%20like%20to%20inquire%20about%20your%20services." 
+           target="_blank" 
+           class="contact-action-btn whatsapp-btn">
+          <i class="bi bi-send"></i> Message on WhatsApp
+        </a>
+        <div class="alternative-contact">
+          <small>Or call us directly:</small>
+          <a href="tel:+2348161133209">+234 816 113 3209</a>
+        </div>
+      </div>
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
+      <!-- Email Card -->
+      <div class="contact-option-card reveal reveal-delay-1">
+        <div class="card-icon email-icon">
+          <i class="bi bi-envelope-fill"></i>
+        </div>
+        <h3>Send an Email</h3>
+        <p>Prefer email? We'll get back to you within 48 hours.</p>
+        <a href="mailto:info@okilointegratedhub.com?subject=Inquiry%20from%20Website&body=Hello%20Okilo%20Integrated%20Hub%2C%0A%0AI%20would%20like%20to%20inquire%20about%3A%0A%0A%5BPlease%20write%20your%20message%20here%5D%0A%0ABest%20regards%2C%0A%5BYour%20Name%5D%0A%5BYour%20Phone%20Number%5D" 
+           class="contact-action-btn email-btn">
+          <i class="bi bi-envelope-paper"></i> Compose Email
+        </a>
+        <div class="alternative-contact">
+          <small>Email us directly:</small>
+          <a href="mailto:info@okilointegratedhub.com">info@okilointegratedhub.com</a>
+        </div>
+      </div>
+    </div>
 
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
+    <!-- Original Info Card (kept as is) -->
+    <div class="contact-grid" style="margin-top: 60px;">
+      <div class="contact-info reveal">
+        <h3>Contact Information</h3>
+        <div class="c-item">
+          <div class="c-icon"><i class="bi bi-geo-alt-fill"></i></div>
+          <div>
+            <div class="c-label">Visit Us</div>
+            <div class="c-val">Shop D-312, Road 2, Ikota Shopping Complex,<br>Lekki Eti-Osa, Lagos, Nigeria</div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon"><i class="bi bi-whatsapp"></i></div>
+          <div>
+            <div class="c-label">WhatsApp</div>
+            <div class="c-val"><a href="https://wa.me/2348161133209">+234 816 113 3209</a></div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon"><i class="bi bi-envelope-fill"></i></div>
+          <div>
+            <div class="c-label">Email</div>
+            <div class="c-val"><a href="mailto:info@okilointegratedhub.com">info@okilointegratedhub.com</a></div>
+          </div>
+        </div>
+        <div style="margin-top:36px;padding-top:28px;border-top:1px solid rgba(255,255,255,.1)">
+          <div class="c-label" style="margin-bottom:16px">Follow Us</div>
+          <div class="socials">
+            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" aria-label="Twitter/X"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
 
-        // FAQ accordion
-        document.querySelectorAll('.faq-question').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const item = btn.closest('.faq-item');
-                const isOpen = item.classList.contains('open');
-                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-                if (!isOpen) item.classList.add('open');
-            });
-        });
+      <!-- Working Hours Card -->
+      <div class="contact-info reveal reveal-delay-2">
+        <h3>Working Hours</h3>
+        <div class="c-item">
+          <div class="c-icon"><i class="bi bi-clock"></i></div>
+          <div>
+            <div class="c-label">Monday - Friday</div>
+            <div class="c-val">9:00 AM - 6:00 PM</div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon"><i class="bi bi-clock"></i></div>
+          <div>
+            <div class="c-label">Saturday</div>
+            <div class="c-val">10:00 AM - 2:00 PM</div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon"><i class="bi bi-calendar-x"></i></div>
+          <div>
+            <div class="c-label">Sunday</div>
+            <div class="c-val">Closed</div>
+          </div>
+        </div>
+        <div style="margin-top:36px;padding:20px;background:rgba(255,183,0,0.1);border-radius:12px;text-align:center">
+          <div class="c-label" style="margin-bottom:8px">Emergency Support</div>
+          <div class="c-val" style="font-size:14px">Available 24/7 for urgent projects</div>
+          <a href="https://wa.me/2348161133209" style="color:var(--gold);font-weight:bold;margin-top:12px;display:inline-block">
+            <i class="bi bi-lightning-charge"></i> Priority Contact
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // Form submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Create toast notification
-            const toast = document.createElement('div');
-            toast.style.cssText = `
-                position: fixed;
-                bottom: 30px;
-                right: 30px;
-                background: var(--secondary);
-                color: var(--primary);
-                padding: 20px 30px;
-                border-radius: 12px;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-                font-weight: 600;
-                z-index: 9999;
-                display: flex;
-                align-items: center;
-                gap: 12px;
-                animation: slideIn 0.3s ease;
-            `;
-            toast.innerHTML = '<i class="bi bi-check-circle-fill"></i> Message sent successfully!';
-            document.body.appendChild(toast);
-            
-            this.reset();
-            
-            setTimeout(() => {
-                toast.style.animation = 'slideOut 0.3s ease';
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
-        });
+<style>
+/* Additional styles for the new contact options */
+.contact-options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+}
 
-        // Add keyframes for toast
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideIn {
-                from { transform: translateX(400px); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
-            }
-            @keyframes slideOut {
-                from { transform: translateX(0); opacity: 1; }
-                to { transform: translateX(400px); opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
+.contact-option-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+  border: 1px solid rgba(255,183,0,0.2);
+  border-radius: 24px;
+  padding: 40px 30px;
+  text-align: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.contact-option-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--gold);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.card-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+}
+
+.whatsapp-icon {
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  color: white;
+}
+
+.email-icon {
+  background: linear-gradient(135deg, #EA4335, #C5221F);
+  color: white;
+}
+
+.contact-option-card h3 {
+  color: var(--gold);
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.contact-option-card p {
+  color: #b6dffa;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.contact-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: 50px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.whatsapp-btn {
+  background: #25D366;
+  color: #002147;
+  border: 2px solid #25D366;
+}
+
+.whatsapp-btn:hover {
+  background: transparent;
+  color: #25D366;
+  transform: scale(1.05);
+}
+
+.email-btn {
+  background: #EA4335;
+  color: white;
+  border: 2px solid #EA4335;
+}
+
+.email-btn:hover {
+  background: transparent;
+  color: #EA4335;
+  transform: scale(1.05);
+}
+
+.alternative-contact {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  font-size: 13px;
+}
+
+.alternative-contact small {
+  color: #b6dffa;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.alternative-contact a {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.alternative-contact a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .contact-options-grid {
+    gap: 20px;
+  }
+  
+  .contact-option-card {
+    padding: 30px 20px;
+  }
+  
+  .card-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 30px;
+  }
+  
+  .contact-option-card h3 {
+    font-size: 20px;
+  }
+  
+  .contact-action-btn {
+    padding: 12px 24px;
+    font-size: 13px;
+  }
+}
+</style>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo-wrap">
+          <div class="logo-mark">
+            <img src="icon.png" alt="Okilo Integrated Hub">
+          </div>
+          <div class="logo-text">
+            Okilo
+            <span>Integrated Hub</span>
+          </div>
+        </a>
+        <p>We build products that preserve our culture, share our stories, and shape our future. African stories deserve world-class platforms.</p>
+        <div class="socials">
+          <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" aria-label="Twitter/X"><i class="bi bi-twitter-x"></i></a>
+          <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#home"><i class="bi bi-arrow-right-short"></i>Home</a></li>
+          <li><a href="#services"><i class="bi bi-arrow-right-short"></i>Services</a></li>
+          <li><a href="#about"><i class="bi bi-arrow-right-short"></i>About Us</a></li>
+          <li><a href="#danfo"><i class="bi bi-arrow-right-short"></i>Danfo Hustle</a></li>
+          <li><a href="#faq"><i class="bi bi-arrow-right-short"></i>FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services"><i class="bi bi-arrow-right-short"></i>Game Development</a></li>
+          <li><a href="#services"><i class="bi bi-arrow-right-short"></i>Web & Mobile Apps</a></li>
+          <li><a href="#services"><i class="bi bi-arrow-right-short"></i>UI/UX Design</a></li>
+          <li><a href="#services"><i class="bi bi-arrow-right-short"></i>E-commerce</a></li>
+          <li><a href="#services"><i class="bi bi-arrow-right-short"></i>Digital Marketing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#"><i class="bi bi-geo-alt"></i>Shop D-312, Road 2, Ikota Shopping Complex, Lekki, Lagos</a></li>
+          <li><a href="https://wa.me/2348161133209"><i class="bi bi-whatsapp"></i>+234 816 113 3209</a></li>
+          <li><a href="mailto:info@okilointegratedhub.com"><i class="bi bi-envelope"></i>info@okilointegratedhub.com</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2025 Okilo Integrated Hub Ltd. All rights reserved. Crafted with <i class="bi bi-heart-fill" style="color:var(--gold)"></i> in Lagos, Nigeria.
+  </div>
+</footer>
+
+<!-- ═══════════ SCRIPTS ═══════════ -->
+<script>
+/* ── Hamburger ── */
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
+if (hamburger && mobileNav) {
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileNav.classList.toggle('open');
+  });
+  mobileNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileNav.classList.remove('open');
+    });
+  });
+}
+
+/* ── Smooth scroll ── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href');
+    if (id === '#') return;
+    const el = document.querySelector(id);
+    if (el) {
+      e.preventDefault();
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+/* ── Reveal on scroll ── */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ── FAQ accordion ── */
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+/* ── Optional: Show success message when clicking contact buttons ── */
+function showNotification(message, type = 'success') {
+  const notif = document.createElement('div');
+  notif.className = `notification ${type}`;
+  notif.innerHTML = `<i class="bi ${type === 'success' ? 'bi-check-circle-fill' : 'bi-info-circle-fill'}"></i> ${message}`;
+  document.body.appendChild(notif);
+  setTimeout(() => {
+    notif.style.opacity = '0';
+    setTimeout(() => notif.remove(), 300);
+  }, 3000);
+}
+
+// Add click tracking (optional)
+document.querySelectorAll('.contact-action-btn, .whatsapp-btn, .email-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const type = btn.classList.contains('whatsapp-btn') ? 'WhatsApp' : 'Email';
+    console.log(`Contact initiated via ${type}`);
+  });
+});
+</script>
+
+<style>
+/* Additional notification styles */
+.notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--gold);
+  color: #002147;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  z-index: 10000;
+  animation: slideIn 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.notification i {
+  margin-right: 8px;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+</style>
+
 </body>
 </html>
