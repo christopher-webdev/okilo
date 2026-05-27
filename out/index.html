@@ -446,6 +446,15 @@ body {
   text-transform: uppercase; color: var(--sky);
   margin-top: 4px;
 }
+.about-badge-location {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px; color: var(--gold); line-height: 1.1;
+}
+.about-badge-sub {
+  font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--sky);
+  margin-top: 4px;
+}
 .about-features {
   display: flex; flex-direction: column; gap: 4px;
   margin: 32px 0 40px;
@@ -553,39 +562,37 @@ body {
 }
 .founder-section::before {
   content: '';
-  position: absolute; inset: 0;
-  background-image:
-    linear-gradient(rgba(57,107,180,.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(57,107,180,.06) 1px, transparent 1px);
-  background-size: 50px 50px;
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(ellipse at 70% 50%, rgba(255,183,0,.06) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 80%, rgba(57,107,180,.1) 0%, transparent 50%);
   pointer-events: none;
 }
 .founder-glow {
-  position: absolute; top: -300px; right: -300px;
-  width: 800px; height: 800px;
-  background: radial-gradient(circle, rgba(57,107,180,.12) 0%, transparent 65%);
+  position: absolute; top: -180px; right: -120px;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(255,183,0,.08) 0%, transparent 70%);
   pointer-events: none;
 }
 .founder-grid {
   display: grid; grid-template-columns: 1fr 1fr;
-  position: relative; z-index: 1;
+  gap: 0; min-height: 560px; position: relative; z-index: 2;
 }
 .founder-left {
-  padding: 100px 64px 100px 0;
-  display: flex; flex-direction: column; justify-content: center;
+  padding: 80px 60px 80px 0; display: flex;
+  flex-direction: column; justify-content: center;
 }
 .founder-big-num {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 200px; line-height: .8;
-  color: rgba(57,107,180,.1);
-  position: absolute; top: 20px; left: 0;
-  pointer-events: none; letter-spacing: -4px;
+  font-size: 160px; line-height: .85;
+  color: rgba(255,255,255,.03);
+  margin-bottom: -28px; pointer-events: none;
 }
 .founder-name {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(56px, 6vw, 80px);
-  line-height: .9; letter-spacing: 2px;
-  color: var(--white); margin-bottom: 8px;
+  font-size: clamp(48px, 5vw, 72px);
+  line-height: .9; letter-spacing: 1px;
+  color: var(--white); margin-bottom: 16px;
 }
 .founder-role {
   font-size: 12px; letter-spacing: 4px; text-transform: uppercase;
@@ -629,6 +636,44 @@ body {
 }
 
 /* ═══════════════════════════════════════════
+   TEAM
+═══════════════════════════════════════════ */
+.team-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 380px)); gap: 32px;
+  justify-content: center;
+}
+.team-card {
+  background: var(--white); border: 1px solid var(--border);
+  padding: 48px 36px; text-align: center;
+  transition: all .3s;
+}
+.team-card:hover {
+  box-shadow: 0 20px 60px rgba(0,33,71,.1);
+  transform: translateY(-4px);
+}
+.team-avatar {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: var(--navy); color: var(--gold);
+  font-family: 'Bebas Neue', sans-serif; font-size: 32px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 24px;
+}
+.team-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px; letter-spacing: 1px;
+  color: var(--navy); margin-bottom: 8px;
+}
+.team-role {
+  font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 20px;
+}
+.team-bio {
+  font-size: 14px; line-height: 1.8;
+  color: var(--muted); margin-bottom: 12px;
+}
+
+
+/* ═══════════════════════════════════════════
    DANFO HUSTLE
 ═══════════════════════════════════════════ */
 .danfo-grid {
@@ -668,7 +713,8 @@ body {
    PARTNERS
 ═══════════════════════════════════════════ */
 .partners-grid {
-  display: grid; grid-template-columns: repeat(3,1fr); gap: 24px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 380px)); gap: 24px;
+  justify-content: center;
 }
 .partner-card {
   border: 1px solid var(--border); padding: 48px 36px;
@@ -924,6 +970,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   .founder-grid   { grid-template-columns: 1fr; }
   .founder-right  { min-height: 340px; }
   .founder-left   { padding: 72px 0 0; }
+  .team-grid      { grid-template-columns: 1fr; }
 
   .danfo-grid     { grid-template-columns: 1fr; gap: 48px; }
   .partners-grid  { grid-template-columns: 1fr; }
@@ -972,8 +1019,9 @@ textarea.form-control { resize: vertical; min-height: 130px; }
       <li><a href="#home">Home</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#danfo">Danfo Hustle</a></li>
-      <li><a href="#services">Services</a></li>
+      <li><a href="#products">Products</a></li>
       <li><a href="#founder">Founder</a></li>
+      <li><a href="#team">Team</a></li>
       <li><a href="#partners">Partners</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#contact" class="nav-cta">Contact</a></li>
@@ -987,8 +1035,9 @@ textarea.form-control { resize: vertical; min-height: 130px; }
     <a href="#home">Home</a>
     <a href="#about">About</a>
     <a href="#danfo">Danfo Hustle</a>
-    <a href="#services">Services</a>
+    <a href="#products">Products</a>
     <a href="#founder">Founder</a>
+    <a href="#team">Team</a>
     <a href="#partners">Partners</a>
     <a href="#faq">FAQ</a>
     <a href="#contact">Contact</a>
@@ -1007,16 +1056,17 @@ textarea.form-control { resize: vertical; min-height: 130px; }
         Lagos · Africa · World
       </div>
       <h1>
-        WE BUILD PRODUCTS THAT PRESERVE OUR CULTURE 
+        WE BUILD PRODUCTS THAT
         <em>SHARE OUR STORIES</em>
-        AND SHAPE OUR FUTURE
+        SHAPE OUR FUTURE
+        AND PRESERVE OUR CULTURE
       </h1>
       <p class="hero-desc">
-        We integrate creative approaches with technical expertise to develop high-quality digital products — rooted in African culture, built for the world.
+        We integrate creative approaches with technical expertise to develop high-quality digital products rooted in African culture, built for the world.
       </p>
       <div class="hero-btns">
-        <a href="#services" class="btn btn-gold">
-          <i class="bi bi-arrow-right"></i> Explore Services
+        <a href="#products" class="btn btn-gold">
+          <i class="bi bi-arrow-right"></i> Explore Products
         </a>
         <a href="#contact" class="btn btn-outline-white">
           <i class="bi bi-chat-dots"></i> Let's Talk
@@ -1040,10 +1090,6 @@ textarea.form-control { resize: vertical; min-height: 130px; }
     <div class="hero-visual reveal reveal-delay-2">
       <div class="hero-img-frame">
         <img src="jj-removebg-preview (1).png" alt="Okilo Integrated Hub Team" onerror="this.src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80'">
-        <div class="hero-badge">
-          <div class="hero-badge-num">5+</div>
-          <div class="hero-badge-label">Years Strong</div>
-        </div>
         <div class="hero-badge-2">
           <div class="hero-badge-num">Lagos</div>
           <div class="hero-badge-label">Nigeria</div>
@@ -1063,18 +1109,12 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   <div class="marquee-track">
     <!-- two copies for seamless loop -->
     <span class="marquee-item"><i class="bi bi-dot"></i>Game Development</span>
-    <span class="marquee-item"><i class="bi bi-dot"></i>Web & Mobile Apps</span>
-    <span class="marquee-item"><i class="bi bi-dot"></i>UI/UX Design</span>
-    <span class="marquee-item"><i class="bi bi-dot"></i>E-Commerce</span>
-    <span class="marquee-item"><i class="bi bi-dot"></i>Digital Marketing</span>
-    <span class="marquee-item"><i class="bi bi-dot"></i>SaaS & Fintech</span>
+    <span class="marquee-item"><i class="bi bi-dot"></i>Narrative Gaming</span>
+    <span class="marquee-item"><i class="bi bi-dot"></i>Cultural Products</span>
     <span class="marquee-item"><i class="bi bi-dot"></i>African Innovation</span>
     <span class="marquee-item"><i class="bi bi-dot"></i>Game Development</span>
-    <span class="marquee-item"><i class="bi bi-dot"></i>Web & Mobile Apps</span>
-    <span class="marquee-item"><i class="bi bi-dot"></i>UI/UX Design</span>
-    <span class="marquee-item"><i class="bi bi-dot"></i>E-Commerce</span>
-    <span class="marquee-item"><i class="bi bi-dot"></i>Digital Marketing</span>
-    <span class="marquee-item"><i class="bi bi-dot"></i>SaaS & Fintech</span>
+    <span class="marquee-item"><i class="bi bi-dot"></i>Narrative Gaming</span>
+    <span class="marquee-item"><i class="bi bi-dot"></i>Cultural Products</span>
     <span class="marquee-item"><i class="bi bi-dot"></i>African Innovation</span>
   </div>
 </div>
@@ -1089,8 +1129,8 @@ textarea.form-control { resize: vertical; min-height: 130px; }
       <img src="jj-removebg-preview (1).png" alt="Team" class="about-img-accent"
            onerror="this.src='https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&q=80'">
       <div class="about-badge">
-        <div class="about-badge-num">5+</div>
-        <div class="about-badge-txt">Years of Impact</div>
+        <div class="about-badge-location">Lagos</div>
+        <div class="about-badge-sub">Nigeria</div>
       </div>
     </div>
     <div class="about-content reveal reveal-delay-2">
@@ -1098,10 +1138,10 @@ textarea.form-control { resize: vertical; min-height: 130px; }
       <h2 class="section-title">Who <em>Are We?</em></h2>
       <div class="divider-gold"></div>
       <p style="font-size:15px;line-height:1.85;color:var(--muted);margin-bottom:16px">
-        Okilo Integrated Hub Ltd (OIH) is a Lagos-based technology and product company focused on transforming ideas into impactful, user-centered solutions. Founded by Okezie Chukukere, OIH operates at the intersection of culture, technology, and community.
+        Okilo Integrated Hub Ltd (OIH) is a technology and product company based in Lagos. We turn ideas into practical, user-focused solutions. Founded by Okezie Chukukere, OIH brings together culture, technology, and community across all our work.
       </p>
       <p style="font-size:15px;line-height:1.85;color:var(--muted);margin-bottom:24px">
-        We are not a typical digital agency. As a product-focused company, our purpose is to use technology to foster meaningful human connections. From learning platforms to narrative-driven games, every venture begins with the user and is designed for measurable impact.
+        We are not a typical digital agency. Our primary goal is to use technology to help people connect meaningfully. Whether we are building learning platforms or story-based games, we always start with the user and strive to make a real difference.
       </p>
       <div class="about-features">
         <div class="about-feat">
@@ -1141,12 +1181,12 @@ textarea.form-control { resize: vertical; min-height: 130px; }
       <div class="mv-card mv-card--mission reveal">
         <div class="mv-icon"><i class="bi bi-bullseye"></i></div>
         <h3>Our Mission</h3>
-        <p>We turn ideas into user-focused technology that preserves culture, amplifies underrepresented narratives, and shapes a creative, purposeful future. Our products connect communities, restore heritage, and empower users globally.</p>
+        <p>We develop user-focused technology that preserves culture, amplifies underrepresented narratives, and shapes a creative, purposeful future. Our products connect communities, restore heritage, and empower users worldwide.</p>
       </div>
       <div class="mv-card mv-card--vision reveal reveal-delay-2">
         <div class="mv-icon"><i class="bi bi-eye"></i></div>
         <h3>Our Vision</h3>
-        <p>To become a globally recognized product house grounded in cultural identity, renowned for developing platforms that ensure African narratives are accessible, celebrated, and preserved for future generations.</p>
+        <p>To become a globally recognized product house rooted in cultural identity, known for developing platforms that make African narratives accessible, celebrated, and preserved for future generations.</p>
       </div>
     </div>
 
@@ -1194,11 +1234,11 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 <section id="danfo" class="section section--dark">
   <div class="container danfo-grid">
     <div class="danfo-content reveal">
-      <div class="eyebrow">Narrative Gaming</div>
+      <div class="eyebrow">Flagship Product</div>
       <h2 class="section-title">Danfo <em>Hustle</em></h2>
       <div class="divider-gold"></div>
       <p style="font-size:15px;line-height:1.85;color:rgba(255,255,255,.65);margin-bottom:12px">
-        Danfo Hustle is OIH's gaming label and one of its two flagship product lines. It offers story-driven, culturally grounded mobile games for a global audience, beginning with the streets of Lagos.
+        Danfo Hustle is OIH's gaming label and flagship product line. It offers story-driven, culturally grounded mobile games for a global audience, beginning with the streets of Lagos.
       </p>
       <p style="font-size:15px;line-height:1.85;color:rgba(255,255,255,.55)">
         <strong style="color:rgba(255,255,255,.8)">Lasgidi Payback</strong> is the first chapter — an arcade driving and narrative adventure game set in Lagos. Players navigate real routes, build transport empires, meet authentic characters, and complete community missions.
@@ -1233,51 +1273,21 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 </section>
 
 
-<!-- ═══════════ SERVICES ═══════════ -->
-<section id="services" class="section">
+<!-- ═══════════ FLAGSHIP PRODUCTS ═══════════ -->
+<section id="products" class="section">
   <div class="container">
     <div class="section-header" style="margin-bottom:56px">
       <div class="eyebrow">What We Do</div>
       <h2 class="section-title">Crafting <em>Digital</em><br>Excellence</h2>
       <div class="divider-gold"></div>
-      <p class="section-desc">Okilo Integrated Hub creates technology-driven products and platforms grounded in culture. We focus on areas where mainstream technology has not adequately addressed cultural and human experiences.</p>
+      <p class="section-desc">Okilo Integrated Hub creates technology-driven products and platforms rooted in culture. We focus on areas where technology can better celebrate, reflect, and enhance cultural and human experiences.</p>
     </div>
     <div class="services-grid">
       <div class="service-card reveal">
         <div class="s-num">01</div>
         <div class="s-icon"><i class="bi bi-controller"></i></div>
         <div class="s-title">Game Development</div>
-        <p class="s-desc">Including Danfo Hustle (endless runner + tycoon). Engaging, story-rich games that capture culture and imagination.</p>
-      </div>
-      <div class="service-card reveal reveal-delay-1">
-        <div class="s-num">02</div>
-        <div class="s-icon"><i class="bi bi-phone"></i></div>
-        <div class="s-title">Web & Mobile Apps</div>
-        <p class="s-desc">iOS, Android, PWAs, scalable platforms built with modern tech for seamless user experiences across all devices.</p>
-      </div>
-      <div class="service-card reveal reveal-delay-2">
-        <div class="s-num">03</div>
-        <div class="s-icon"><i class="bi bi-palette"></i></div>
-        <div class="s-title">UI/UX & Graphics</div>
-        <p class="s-desc">Stunning, intuitive brand identities and interfaces that users love to interact with every single time.</p>
-      </div>
-      <div class="service-card reveal reveal-delay-1">
-        <div class="s-num">04</div>
-        <div class="s-icon"><i class="bi bi-cart3"></i></div>
-        <div class="s-title">E-Commerce Solutions</div>
-        <p class="s-desc">Custom stores, secure payments, inventory management — everything your business needs to sell online.</p>
-      </div>
-      <div class="service-card reveal reveal-delay-2">
-        <div class="s-num">05</div>
-        <div class="s-icon"><i class="bi bi-cpu"></i></div>
-        <div class="s-title">Digital Solutions</div>
-        <p class="s-desc">SaaS, fintech, AI-powered tools that transform how businesses operate at every level.</p>
-      </div>
-      <div class="service-card reveal reveal-delay-3">
-        <div class="s-num">06</div>
-        <div class="s-icon"><i class="bi bi-graph-up-arrow"></i></div>
-        <div class="s-title">Digital Marketing</div>
-        <p class="s-desc">Growth strategies, automation, brand positioning that gets measurable, meaningful results.</p>
+        <p class="s-desc">Including Danfo Hustle (arcade driving & narrative adventure). An engaging, story-rich game set in Lagos. Players navigate real routes, build transport empires, meet authentic characters, and complete community missions.</p>
       </div>
     </div>
   </div>
@@ -1293,11 +1303,11 @@ textarea.form-control { resize: vertical; min-height: 130px; }
         <div class="founder-big-num">01</div>
         <div class="eyebrow">Meet the Founder</div>
         <h2 class="founder-name">Okezie<br>Chukukere</h2>
-        <p class="founder-role">Founder & CEO, Okilo Integrated Hub</p>
+        <p class="founder-role">Founder &amp; CEO, Okilo Integrated Hub</p>
         <p class="founder-bio">
-          Okezie Chukukere is an entrepreneur, strategist, and ecosystem builder dedicated to developing technology that preserves culture and advances African digital experiences. <strong>Driven by a passion for African innovation and heritage,</strong> Okilo Integrated Hub was founded to connect culture and technology. The company creates products that entertain, empower, and preserve African identity in the digital age.
+          Okezie Chukukere is an entrepreneur and strategist focused on building technology that preserves culture and enhances African digital experiences. Driven by his passion for heritage and digital innovation, he founded Okilo Integrated Hub to bring culture and technology together through products that entertain, empower, and make a real difference.
           <br><br>
-          <!-- <strong>His philosophy is simple</strong> — when you empower one entrepreneur and one story, you transform an entire community. Every product built at OIH is a direct expression of that belief. -->
+          As Founder and CEO, he leads the company's strategic vision, direction, partnership development, and portfolio growth across OIH's product lines.
         </p>
         <div class="founder-badges">
           <span class="f-badge">Entrepreneur</span>
@@ -1319,6 +1329,48 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   </div>
 </section>
 
+<!-- ═══════════ THE TEAM ═══════════ -->
+<section id="team" class="section section--off">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:56px" class="reveal">
+      <div class="eyebrow" style="justify-content:center">The Team</div>
+      <h2 class="section-title" style="color:var(--navy)">Meet the <em>Team</em></h2>
+      <div class="divider-gold" style="margin:20px auto 0"></div>
+    </div>
+    <div class="team-grid">
+<div class="team-card reveal">
+        <div class="team-avatar">SI</div>
+        <h3 class="team-name">Solomon Iwu-Ejike</h3>
+        <p class="team-role">Project Director, Product Lead, and Founding Partner, Danfo Hustle</p>
+        <p class="team-bio">Solomon Iwu-Ejike leads product strategy and execution at Danfo Hustle, the gaming label within Okilo Integrated Hub. He combines creative leadership with operational expertise to deliver engaging, innovative digital products across OIH's product lines.</p>
+      </div>
+      <div class="team-card reveal reveal-delay-1">
+        <div class="team-avatar">CA</div>
+        <h3 class="team-name">Okezie Charles Anuebunwa</h3>
+        <p class="team-role">Director of Operations Support &amp; Logistics</p>
+        <p class="team-bio">Charles Anuebunwa oversees logistics coordination and operational execution support across Okilo Integrated Hub's product and distribution activities. His expertise ensures the project's seamless execution.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════ WHY WE BUILD ═══════════ -->
+<section id="why" class="section">
+  <div class="container">
+    <div style="text-align:center;max-width:720px;margin:0 auto" class="reveal">
+      <div class="eyebrow" style="justify-content:center">Why We Build</div>
+      <h2 class="section-title" style="color:var(--navy)">Our <em>Purpose</em></h2>
+      <div class="divider-gold" style="margin:20px auto 32px"></div>
+      <p style="font-size:16px;line-height:1.85;color:var(--muted);margin-bottom:20px">
+        We build for the communities that shaped us, the languages we speak, and the next generation of African creators seeking proof of our work's global impact.
+      </p>
+      <p style="font-size:16px;line-height:1.85;color:var(--muted)">
+        Each product we launch reflects our belief that culture and technology, thoughtfully combined, can do more than entertain. They can preserve heritage, create opportunities, and inspire others.
+      </p>
+    </div>
+  </div>
+</section>
 
 <!-- ═══════════ PARTNERS ═══════════ -->
 <section id="partners" class="section section--off">
@@ -1330,19 +1382,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
       <p class="section-desc" style="margin:0 auto;text-align:center">Trusted by leading organisations in the creative and tech industry.</p>
     </div>
     <div class="partners-grid">
-      <div class="partner-card reveal">
-        <img src="ac.png" alt="Africa Comicade" class="partner-logo"
-             onerror="this.style.display='none'">
-        <h4>Africa Comicade</h4>
-        <p>Empowering comic & game creators across the continent</p>
-      </div>
-      <div class="partner-card reveal reveal-delay-1">
-        <img src="g.png" alt="Gamathon" class="partner-logo"
-             onerror="this.style.display='none'">
-        <h4>Gamathon</h4>
-        <p>Premier gaming competitions and esports events</p>
-      </div>
-      <div class="partner-card reveal reveal-delay-2">
+      <div class="partner-card reveal" style="margin:0 auto">
         <img src="b.png" alt="Beyond Service" class="partner-logo"
              onerror="this.style.display='none'">
         <h4>Beyond Service</h4>
@@ -1357,52 +1397,6 @@ textarea.form-control { resize: vertical; min-height: 130px; }
   </div>
 </section>
 
-
-<!-- ═══════════ TESTIMONIALS ═══════════ -->
-<section class="section">
-  <div class="container">
-    <div style="margin-bottom:56px" class="reveal">
-      <div class="eyebrow">Kind Words</div>
-      <h2 class="section-title">What Clients <em>Say</em></h2>
-      <div class="divider-gold"></div>
-    </div>
-    <div class="testi-grid">
-      <div class="testi-card reveal">
-        <span class="testi-quote">"</span>
-        <p class="testi-text">Okilo transformed our digital presence completely. We saw a 300% increase in customer engagement within months of launching our new platform!</p>
-        <div class="testi-author">
-          <div class="testi-avatar">OC</div>
-          <div>
-            <div class="testi-name">Okezie Charles</div>
-            <div class="testi-role">CEO, Stellar Dynamics</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card reveal reveal-delay-1">
-        <span class="testi-quote">"</span>
-        <p class="testi-text">The app they built for my startup is sleek, fast, and scalable. Truly a world-class team that understands modern tech and user needs.</p>
-        <div class="testi-author">
-          <div class="testi-avatar">SO</div>
-          <div>
-            <div class="testi-name">Solomon Ogbanuegwu</div>
-            <div class="testi-role">Managing Director, Carbonex</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card reveal reveal-delay-2">
-        <span class="testi-quote">"</span>
-        <p class="testi-text">Innovative, efficient, and professional — they're simply the best in the business. Our go-to team for all digital projects.</p>
-        <div class="testi-author">
-          <div class="testi-avatar">CJ</div>
-          <div>
-            <div class="testi-name">CJ Michael</div>
-            <div class="testi-role">Whitemoon Integrated</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 
 <!-- ═══════════ FAQ ═══════════ -->
@@ -1428,7 +1422,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
       </div>
       <div class="faq-item reveal">
         <button class="faq-q">What kind of products do you build? <i class="bi bi-plus-circle-fill"></i></button>
-        <div class="faq-ans"><p>We build culturally grounded digital products including mobile games, web and mobile applications, e-commerce solutions, SaaS platforms, and UI/UX design systems — all with deep roots in African culture and community.</p></div>
+        <div class="faq-ans"><p>We build culturally grounded digital products including narrative-driven games like Danfo Hustle — an arcade driving and narrative adventure set in Lagos — and other platforms that preserve and celebrate African culture and community.</p></div>
       </div>
       <div class="faq-item reveal">
         <button class="faq-q">How can I work with Okilo Integrated Hub? <i class="bi bi-plus-circle-fill"></i></button>
@@ -1457,7 +1451,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
         </div>
         <h3>WhatsApp Us</h3>
         <p>Quick replies within 24 hours. Click to start a conversation instantly.</p>
-        <a href="https://wa.me/2348161133209?text=Hello%21%20I%20would%20like%20to%20inquire%20about%20your%20services." 
+        <a href="https://wa.me/2348161133209?text=Hello%21%20I%20would%20like%20to%20inquire%20about%20your%20products." 
            target="_blank" 
            class="contact-action-btn whatsapp-btn">
           <i class="bi bi-send"></i> Message on WhatsApp
@@ -1514,10 +1508,9 @@ textarea.form-control { resize: vertical; min-height: 130px; }
         <div style="margin-top:36px;padding-top:28px;border-top:1px solid rgba(255,255,255,.1)">
           <div class="c-label" style="margin-bottom:16px">Follow Us</div>
           <div class="socials">
-            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-            <a href="#" aria-label="Twitter/X"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
             <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-            <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
           </div>
         </div>
       </div>
@@ -1569,7 +1562,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 
 .contact-option-card {
   background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
-  border: 1px solid rgba(255,183,0,0.2);
+  border: 1px solid rgba(255,255,255,0.15);
   border-radius: 24px;
   padding: 40px 30px;
   text-align: center;
@@ -1579,7 +1572,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 
 .contact-option-card:hover {
   transform: translateY(-5px);
-  border-color: black;
+  border-color: rgba(255,255,255,0.3);
   box-shadow: 0 20px 40px rgba(0,0,0,0.2);
 }
 
@@ -1612,7 +1605,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 }
 
 .contact-option-card p {
-  color: #b6dffa;
+  color: var(--navy);
   font-size: 14px;
   line-height: 1.6;
   margin-bottom: 24px;
@@ -1664,13 +1657,13 @@ textarea.form-control { resize: vertical; min-height: 130px; }
 }
 
 .alternative-contact small {
-  color: #b6dffa;
+  color: var(--muted);
   display: block;
   margin-bottom: 6px;
 }
 
 .alternative-contact a {
-  color: var(--gold);
+  color: var(--navy);
   text-decoration: none;
   font-weight: bold;
 }
@@ -1719,12 +1712,11 @@ textarea.form-control { resize: vertical; min-height: 130px; }
             <span>Integrated Hub</span>
           </div> -->
         </a>
-        <p>We build products that preserve our culture, share our stories, and shape our future. African stories deserve world-class platforms.</p>
+        <p>We build products that share our stories, shape our future, and preserve our culture.</p>
         <div class="socials">
-          <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-          <a href="#" aria-label="Twitter/X"><i class="bi bi-twitter-x"></i></a>
+          <a href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
           <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-          <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
         </div>
       </div>
       <div class="footer-col">
@@ -1733,18 +1725,16 @@ textarea.form-control { resize: vertical; min-height: 130px; }
           <li><a href="#home"><i class="bi bi-arrow-right-short"></i>Home</a></li>
           <li><a href="#about"><i class="bi bi-arrow-right-short"></i>About Us</a></li>
           <li><a href="#danfo"><i class="bi bi-arrow-right-short"></i>Danfo Hustle</a></li>
-          <li><a href="#services"><i class="bi bi-arrow-right-short"></i>Services</a></li>
+          <li><a href="#products"><i class="bi bi-arrow-right-short"></i>Products</a></li>
           <li><a href="#faq"><i class="bi bi-arrow-right-short"></i>FAQ</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Services</h4>
+        <h4>Products</h4>
         <ul>
-          <li><a href="#services"><i class="bi bi-arrow-right-short"></i>Game Development</a></li>
-          <li><a href="#services"><i class="bi bi-arrow-right-short"></i>Web & Mobile Apps</a></li>
-          <li><a href="#services"><i class="bi bi-arrow-right-short"></i>UI/UX Design</a></li>
-          <li><a href="#services"><i class="bi bi-arrow-right-short"></i>E-commerce</a></li>
-          <li><a href="#services"><i class="bi bi-arrow-right-short"></i>Digital Marketing</a></li>
+          <li><a href="#products"><i class="bi bi-arrow-right-short"></i>Game Development</a></li>
+          <li><a href="#danfo"><i class="bi bi-arrow-right-short"></i>Danfo Hustle</a></li>
+          <li><a href="#danfo"><i class="bi bi-arrow-right-short"></i>Narrative Gaming</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -1758,7 +1748,7 @@ textarea.form-control { resize: vertical; min-height: 130px; }
     </div>
   </div>
   <div class="footer-bottom">
-    &copy; 2026 Okilo Integrated Hub Ltd. All rights reserved. Crafted with <i class="bi bi-heart-fill" style="color:var(--gold)"></i> in Lagos, Nigeria.
+    &copy; Okilo Integrated Hub — Built in Africa and made for the world.
   </div>
 </footer>
 
