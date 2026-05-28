@@ -578,6 +578,14 @@ body {
   display: grid; grid-template-columns: 1fr 1fr;
   gap: 0; min-height: 560px; position: relative; z-index: 2;
 }
+.founder-grid--reverse .founder-right {
+  order: -1;
+}
+@media (max-width: 768px) {
+  .founder-grid--reverse .founder-right {
+    order: 0;
+  }
+}
 .founder-left {
   padding: 80px 60px 80px 0; display: flex;
   flex-direction: column; justify-content: center;
@@ -1329,13 +1337,8 @@ textarea.form-control { resize: vertical; min-height: 130px; }
     </div>
 
     <!-- Solomon Iwu-Ejike -->
-    <div class="founder-grid" style="margin-bottom:80px">
-      <div class="founder-right reveal">
-        <img src="FO8C3576.JPG.jpeg" alt="Solomon Iwu-Ejike"
-             onerror="this.src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=700&q=80'">
-        <div class="founder-accent"></div>
-      </div>
-      <div class="founder-left reveal reveal-delay-2">
+    <div class="founder-grid founder-grid--reverse" style="margin-bottom:80px">
+      <div class="founder-left reveal">
         <div class="founder-big-num">02</div>
         <div class="eyebrow">Project Director &amp; Product Lead</div>
         <h2 class="founder-name">Solomon<br>Iwu-Ejike</h2>
@@ -1343,6 +1346,11 @@ textarea.form-control { resize: vertical; min-height: 130px; }
         <p class="founder-bio">
           Solomon Iwu-Ejike leads product strategy and execution at Danfo Hustle, the gaming label within Okilo Integrated Hub. He combines creative leadership with operational expertise to deliver engaging, innovative digital products across OIH's product lines.
         </p>
+      </div>
+      <div class="founder-right reveal reveal-delay-2">
+        <img src="FO8C3576.JPG.jpeg" alt="Solomon Iwu-Ejike"
+             onerror="this.src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=700&q=80'">
+        <div class="founder-accent"></div>
       </div>
     </div>
 
