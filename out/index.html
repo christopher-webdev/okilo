@@ -747,6 +747,9 @@ body {
   color: var(--navy); margin-bottom: 8px;
 }
 .partner-card p { font-size: 13px; color: var(--muted); }
+.partner-card.dark-card { background: var(--navy); }
+.partner-card.dark-card h4 { color: var(--white); }
+.partner-card.dark-card p { color: rgba(255,255,255,.7); }
 
 /* ═══════════════════════════════════════════
    TESTIMONIALS
@@ -1399,11 +1402,17 @@ textarea.form-control { resize: vertical; min-height: 130px; }
       <p class="section-desc" style="margin:0 auto;text-align:center">Trusted by leading organisations in the creative and tech industry.</p>
     </div>
     <div class="partners-grid">
-      <div class="partner-card reveal" style="margin:0 auto">
+      <div class="partner-card reveal">
         <img src="b.png" alt="Beyond Service" class="partner-logo"
              onerror="this.style.display='none'">
         <h4>Beyond Service</h4>
         <p>Exceptional customer experience solutions</p>
+      </div>
+      <div class="partner-card reveal dark-card">
+        <img src="Goondu-Games-Logo-white.png" alt="Goondu Games" class="partner-logo"
+             onerror="this.style.display='none'">
+        <h4>Goondu Games</h4>
+        <p>Creative game development studio</p>
       </div>
     </div>
     <div style="text-align:center;margin-top:48px">
